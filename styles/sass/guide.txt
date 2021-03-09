@@ -1,0 +1,13 @@
+Base: base(règle css des gros blocs type wrapper ect ect), typography (du site),animations
+
+Layout: header, footer, grid, navigation, formulaires ...
+
+Components: have a single scss file for each individual component (carousel, loader, slider, ect ect)
+
+Pages: Si nous avons des styles spéfifiques pour chaque Pages
+
+Themes: Gros dossier, thèmes (non utilisé jusqu'a mnt)
+
+Abstracts: handles function, mixins, and variables
+
+Vendor: dossier qui intègre les frameworks css (Bootstrap, Normalize, Tailwind ...)

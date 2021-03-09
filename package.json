@@ -1,0 +1,14 @@
+{
+  "name": "starterkit",
+  "version": "1.0.0",
+  "description": "Dossier starter kit d'un projet sass 7-1",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass styles/sass/main.scss styles/css/main.css -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^5.0.0"
+  }
+}

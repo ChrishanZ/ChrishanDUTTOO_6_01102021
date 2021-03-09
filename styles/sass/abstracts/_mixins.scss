@@ -1,0 +1,5 @@
+@mixin m767 {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
