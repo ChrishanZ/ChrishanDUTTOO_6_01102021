@@ -1,3 +1,7 @@
+@import "./base/_vars";
+@import "./base/_reset";
+@import "./base/_base";
+
 // @import "abstracts/variables";
 // @import "abstracts/functions";
 @import "./abstracts/_mixins";
@@ -5,10 +9,6 @@
 
 // @import "vendors/bootstrap";
 // @import "vendors/jquery-ui";
-
-@import "./base/_reset";
-@import "./base/_base";
-@import "./base/_vars";
 
 // @import "layout/navigation";
 // @import "layout/grid";
