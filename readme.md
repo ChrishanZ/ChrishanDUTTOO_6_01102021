@@ -19,5 +19,8 @@ npm run sass
 
 9 mars 2021 : Initialisation du projet, page html et dossier styles comprenant un dossier css et sass (7-1, lire le readme pour comprendre l'usage).
 
+10 mars 2021 : Ajout du dossier assets (photos, icones ...)
+
+
 ## License
 Free to use.
