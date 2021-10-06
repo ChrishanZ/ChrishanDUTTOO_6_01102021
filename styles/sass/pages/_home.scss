@@ -3,7 +3,6 @@ html {
 }
 
 body {
-  padding: 0 43px;
   font-family: "DM Sans", Arial, Helvetica, sans-serif;
 }
 
@@ -11,7 +10,8 @@ main {
   ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     li {
       width: 400px;
       display: flex;
@@ -83,6 +83,12 @@ main {
           }
         }
       }
+    }
+
+    @include m1023 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

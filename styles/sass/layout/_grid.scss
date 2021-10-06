@@ -1,0 +1,9 @@
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+
+  @include m1023 {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

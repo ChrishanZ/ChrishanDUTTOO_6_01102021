@@ -15,6 +15,8 @@ export default class Photographer {
 
     let anchor = document.createElement("a");
     anchor.href = `./photographerPage.html?id=${this.id}`; //
+
+    console.log(this.id);
     // anchor.className = "photograph__card--link";
 
     let img = document.createElement("img");
