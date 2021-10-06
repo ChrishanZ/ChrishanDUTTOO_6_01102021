@@ -40,6 +40,10 @@ header {
   align-items: center;
 
   padding: 45px;
+
+  @include m1023 {
+    padding: 30px 10px;
+  }
 }
 nav {
   padding: 0 1rem;

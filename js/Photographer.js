@@ -17,18 +17,16 @@ export default class Photographer {
     anchor.href = `./photographerPage.html?id=${this.id}`; //
 
     console.log(this.id);
-    // anchor.className = "photograph__card--link";
 
     let img = document.createElement("img");
     img.src = `media/PhotographersIDPhotos/${this.portrait}`;
-    // img.className = `artist-pict`;
+
     img.alt = `Portrait représentant:  ${this.name}`;
 
     let h2 = document.createElement("h2");
     h2.textContent = `${this.name}`;
 
     let div = document.createElement("div");
-    // div.className = "photograph__card--txt";
 
     let strong = document.createElement("strong");
     strong.textContent = `${this.city}, ${this.country}`;

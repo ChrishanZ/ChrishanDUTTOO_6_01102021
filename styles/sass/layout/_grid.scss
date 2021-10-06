@@ -7,3 +7,13 @@
     margin: 0 auto;
   }
 }
+.containerPhotograph {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 65px;
+  @include m1023 {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+}

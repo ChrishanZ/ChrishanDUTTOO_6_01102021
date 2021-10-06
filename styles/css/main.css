@@ -130,6 +130,16 @@ table {
       max-width: 600px;
       margin: 0 auto; } }
 
+.containerPhotograph {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 65px; }
+  @media screen and (max-width: 1023px) {
+    .containerPhotograph {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 10px; } }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -165,6 +175,9 @@ header {
   justify-content: flex-start;
   align-items: center;
   padding: 45px; }
+  @media screen and (max-width: 1023px) {
+    .headerSimple {
+      padding: 30px 10px; } }
 
 nav {
   padding: 0 1rem; }
@@ -188,6 +201,82 @@ nav {
       margin: 0 auto; }
       nav ul {
         margin: 2rem 0; } }
+
+.photograph-bandeau {
+  display: flex;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  border: 1px solid black;
+  background: #fafafa; }
+  .photograph-bandeau-left_inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; }
+    .photograph-bandeau-left_inner div {
+      font-size: 20px;
+      color: white;
+      padding: 15px;
+      background: #911c1c;
+      border-radius: 5px;
+      margin-left: 100px; }
+  .photograph-bandeau-left h2 {
+    font-size: 64px;
+    color: #d3573c; }
+  .photograph-bandeau-left strong {
+    font-size: 24px;
+    color: #901c1c;
+    margin-bottom: 10px; }
+  .photograph-bandeau-left p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #757575;
+    margin: 10px 0; }
+  .photograph-bandeau-left span {
+    font-size: 9px;
+    font-weight: 12px;
+    color: #757575;
+    margin-bottom: 10px; }
+  .photograph-bandeau-left ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start; }
+    .photograph-bandeau-left ul li {
+      width: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      line-height: 1.55rem;
+      font-weight: 500;
+      border: 1px solid #c4c4c4;
+      padding: 0 5px;
+      margin: 0 2px;
+      border-radius: 10px; }
+  .photograph-bandeau-right img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: fill; }
+
+.photograph-card {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  max-width: 380px;
+  font-size: 2.4rem;
+  font-weight: 500;
+  background: #db8876;
+  border-radius: 5px;
+  padding: 2rem;
+  position: fixed;
+  bottom: -10px;
+  right: 20px; }
+  .photograph-card p {
+    margin-right: 40px; }
+    .photograph-card p:last-child {
+      margin: 0; }
 
 html {
   font-size: 10px; }
