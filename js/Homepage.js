@@ -72,17 +72,23 @@ export default class Homepage {
     this.displayPhotographers();
     console.log(this.displayedPhotographers);
   }
-
+  resetColorTags() {
+    let navigation = document.getElementById("navigation");
+    for (let i = 0; i < navigation.children.length; i++) {
+      navigation.children[i].style.backgroundColor = "white";
+    }
+  }
   displayTags() {
     let navigation = document.getElementById("navigation");
-
     for (let i = 0; i < this.tags.length; i++) {
       let li = document.createElement("li");
       li.textContent = `#${this.tags[i]}`;
       li.setAttribute("id", "anchorTags");
       navigation.appendChild(li);
       li.addEventListener("click", (event) => {
+        this.resetColorTags();
         this.filterTags(this.tags[i]);
+        li.style.backgroundColor = "grey";
       });
     }
   }

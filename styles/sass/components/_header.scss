@@ -6,7 +6,6 @@ header {
   justify-content: center;
   align-items: center;
   padding: 45px;
-
   a {
     display: flex;
     justify-self: flex-start;
@@ -24,6 +23,10 @@ header {
     flex-direction: column;
     position: relative;
     padding: 25px 1rem;
+
+    svg {
+      width: 150px;
+    }
     h1 {
       font-size: 1.4rem;
       line-height: 1.8rem;
@@ -69,6 +72,9 @@ nav {
     margin: 0 auto;
     ul {
       margin: 2rem 0;
+      li {
+        margin: 0.2rem;
+      }
     }
   }
 }

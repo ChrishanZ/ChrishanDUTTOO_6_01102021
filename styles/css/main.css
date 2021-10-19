@@ -163,6 +163,8 @@ header {
       flex-direction: column;
       position: relative;
       padding: 25px 1rem; }
+      header svg {
+        width: 150px; }
       header h1 {
         font-size: 1.4rem;
         line-height: 1.8rem;
@@ -200,7 +202,9 @@ nav {
       max-width: 400px;
       margin: 0 auto; }
       nav ul {
-        margin: 2rem 0; } }
+        margin: 2rem 0; }
+        nav ul li {
+          margin: 0.2rem; } }
 
 .photograph-bandeau {
   display: flex;
@@ -258,7 +262,7 @@ nav {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    object-fit: fill; }
+    object-fit: cover; }
 
 .photograph-card {
   display: flex;
