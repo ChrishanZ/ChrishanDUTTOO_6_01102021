@@ -43,7 +43,7 @@ export default class PhotographerPage {
     }
   }
 
-  displayMedia() {
+  displayFilter() {
     const container = document.querySelector("#container");
     const div = document.createElement("div");
     const divTri = document.createElement("div");
@@ -83,16 +83,16 @@ export default class PhotographerPage {
     pButtonTitre.textContent = `Titre`;
 
     pButtonPopularite.addEventListener("click", () => {
-      arrayMedias = [...arrayMediasLikes];
-      console.log("popu: ", arrayMedias);
+      this.deleteDomMedia();
+      this.displayMedia(arrayMediasLikes);
     });
     pButtonDate.addEventListener("click", () => {
-      arrayMedias = [...arrayMediasDate];
-      console.log("date: ", arrayMedias);
+      this.deleteDomMedia();
+      this.displayMedia(arrayMediasDate);
     });
     pButtonTitre.addEventListener("click", () => {
-      arrayMedias = [...arrayMediasName];
-      console.log("titre: ", arrayMedias);
+      this.deleteDomMedia();
+      this.displayMedia(arrayMediasName);
     });
 
     divButton.className = "photograph-grid-tri_button";
@@ -154,8 +154,12 @@ export default class PhotographerPage {
     });
     console.log("date", arrayMediasDate);
 
-    let arrayMedias = [...arrayMediasLikes];
-    console.log("basic", arrayMedias);
+    this.displayMedia(arrayMediasLikes);
+  }
+
+  displayMedia(arrayMedias) {
+    const container = document.querySelector("#container");
+    const div = document.createElement("div");
 
     // MEDIAS
     const divMedia = document.createElement("div");
@@ -188,6 +192,12 @@ export default class PhotographerPage {
       containerMedia.appendChild(bottomMedia);
       divMedia.appendChild(containerMedia);
       div.appendChild(divMedia);
+      container.appendChild(div);
     }
+  }
+
+  deleteDomMedia() {
+    const containerMedia = document.querySelector(".photograph-grid-media");
+    containerMedia.remove();
   }
 }
