@@ -111,15 +111,14 @@ export default class Photographer {
     container.appendChild(divContainer);
   }
 
-  displayCard() {
+  displayCard(likes) {
     const container = document.querySelector("#container");
     const div = document.createElement("div");
     div.className = "photograph-card";
     const p = document.createElement("p");
-    p.textContent = `297 081 ♥`;
+    p.textContent = `${likes} ♥`;
     const pSecond = document.createElement("p");
     pSecond.textContent = `${this.price}€ / jour`;
-
     div.appendChild(p);
     div.appendChild(pSecond);
     container.appendChild(div);
