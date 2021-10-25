@@ -171,10 +171,57 @@ export default class PhotographerPage {
       const imgMedia = document.createElement("img");
       if (arrayMedias[l].video) {
         vidMedia.src = `media/artistsVideos/${arrayMedias[l].video}`;
+        vidMedia.addEventListener("click", () => {
+          console.log("video");
+        });
         containerMedia.appendChild(vidMedia);
       } else if (arrayMedias[l].image) {
         imgMedia.src = `media/artistsPictures/${arrayMedias[l].image}`;
         imgMedia.alt = `${arrayMedias[l].alt}`;
+
+        imgMedia.addEventListener("click", () => {
+          const lightboxModal = document.createElement("div");
+          lightboxModal.classList = "lightboxModal";
+          lightboxModal.style.display = "flex";
+          const left = document.createElement("span");
+          left.classList = "lightboxModal_left";
+
+          const right = document.createElement("span");
+          right.classList = "lightboxModal_right";
+
+          const cross = document.createElement("span");
+          cross.classList = "lightboxModal_cross";
+
+          const lightboxImg = document.createElement("img");
+          lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
+          lightboxImg.alt = `${arrayMedias[l].alt}`;
+          lightboxModal.appendChild(lightboxImg);
+
+          right.addEventListener("click", () => {
+            lightboxImg.remove();
+            l++;
+            lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
+            lightboxImg.alt = `${arrayMedias[l].alt}`;
+            lightboxModal.appendChild(lightboxImg);
+          });
+
+          left.addEventListener("click", () => {
+            lightboxImg.remove();
+            l--;
+            lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
+            lightboxImg.alt = `${arrayMedias[l].alt}`;
+            lightboxModal.appendChild(lightboxImg);
+          });
+          cross.addEventListener("click", () => {
+            lightboxModal.style.display = "none";
+          });
+
+          lightboxModal.appendChild(left);
+
+          lightboxModal.appendChild(right);
+          lightboxModal.appendChild(cross);
+          containerMedia.appendChild(lightboxModal);
+        });
         containerMedia.appendChild(imgMedia);
       }
 

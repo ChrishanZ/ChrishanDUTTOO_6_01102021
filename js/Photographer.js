@@ -14,7 +14,6 @@ export default class Photographer {
 
   display() {
     let li = document.createElement("li");
-
     let anchor = document.createElement("a");
     anchor.href = `./photographerPage.html?id=${this.id}`; //
 
@@ -74,6 +73,68 @@ export default class Photographer {
     const divButton = document.createElement("div");
     const h3 = document.createElement("h3");
     h3.textContent = `Contactez-moi`;
+    h3.addEventListener("click", () => {
+      divModal.style.display = "flex";
+    });
+
+    const divModal = document.createElement("div");
+    const divFormModal = document.createElement("div");
+
+    const h4Modal = document.createElement("h4");
+    h4Modal.textContent = `Contactez-moi ${this.name}`;
+    const cross = document.createElement("span");
+    cross.addEventListener("click", () => {
+      divModal.style.display = "none";
+    });
+    const divTitle = document.createElement("div");
+    divTitle.classList = "modal-container_title";
+
+    divTitle.appendChild(h4Modal);
+    divTitle.appendChild(cross);
+
+    const divFormModalContainer = document.createElement("div");
+
+    const pModalPrenom = document.createElement("p");
+    const inputPrenom = document.createElement("input");
+    inputPrenom.setAttribute("type", "text");
+    const pModalNom = document.createElement("p");
+    const inputNom = document.createElement("input");
+    inputNom.setAttribute("type", "text");
+    const pModalEmail = document.createElement("p");
+    const inputEmail = document.createElement("input");
+    inputEmail.setAttribute("type", "text");
+    const pModalMsg = document.createElement("p");
+    const inputMsg = document.createElement("textarea");
+
+    const buttonSend = document.createElement("button");
+    buttonSend.textContent = `Envoyer`;
+
+    pModalPrenom.textContent = `Prénom`;
+    pModalNom.textContent = `Nom`;
+    pModalEmail.textContent = `Email`;
+    pModalMsg.textContent = `Votre Message`;
+
+    divFormModalContainer.appendChild(pModalPrenom);
+    divFormModalContainer.appendChild(inputPrenom);
+    divFormModalContainer.appendChild(pModalNom);
+    divFormModalContainer.appendChild(inputNom);
+    divFormModalContainer.appendChild(pModalEmail);
+    divFormModalContainer.appendChild(inputEmail);
+    divFormModalContainer.appendChild(pModalMsg);
+    divFormModalContainer.appendChild(inputMsg);
+
+    divFormModalContainer.appendChild(buttonSend);
+
+    divModal.classList = "modal";
+    divFormModal.classList = "modal-container";
+    divFormModalContainer.classList = "modal-container_inputs";
+
+    divFormModal.appendChild(divTitle);
+    divFormModal.appendChild(divFormModalContainer);
+    divModal.appendChild(divFormModal);
+    container.appendChild(divModal);
+
+    // ----
 
     const strong = document.createElement("strong");
     strong.textContent = `${this.city}, ${this.country}`;

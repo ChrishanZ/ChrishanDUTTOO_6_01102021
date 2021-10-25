@@ -180,7 +180,7 @@ header {
   padding: 45px; }
   @media screen and (max-width: 1023px) {
     .headerSimple {
-      padding: 30px 10px; } }
+      padding: 2rem; } }
 
 nav {
   padding: 0 1rem; }
@@ -224,6 +224,8 @@ nav {
       background: #911c1c;
       border-radius: 5px;
       margin-left: 100px; }
+      .photograph-bandeau-left_inner div h3 {
+        cursor: pointer; }
   .photograph-bandeau-left h2 {
     font-size: 64px;
     color: #d3573c; }
@@ -263,6 +265,25 @@ nav {
     height: 200px;
     border-radius: 50%;
     object-fit: cover; }
+  @media screen and (max-width: 1023px) {
+    .photograph-bandeau-left_inner div {
+      font-size: 18px;
+      position: fixed;
+      left: 50%;
+      bottom: 3rem;
+      transform: translate(-50%);
+      margin-left: 0; }
+    .photograph-bandeau-left h2 {
+      font-size: 36px; }
+    .photograph-bandeau-left strong {
+      font-size: 13px; }
+    .photograph-bandeau-left p {
+      font-size: 13px; }
+    .photograph-bandeau-left span {
+      font-size: 9px; }
+    .photograph-bandeau-right img {
+      width: 100px;
+      height: 100px; } }
 
 .photograph-card {
   display: flex;
@@ -281,6 +302,9 @@ nav {
     margin-right: 40px; }
     .photograph-card p:last-child {
       margin: 0; }
+  @media screen and (max-width: 1023px) {
+    .photograph-card {
+      display: none; } }
 
 .photograph-grid {
   display: flex;
@@ -377,7 +401,7 @@ nav {
         width: 50px;
         height: 50px;
         cursor: pointer;
-        z-index: 5;
+        z-index: 1;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -385,7 +409,8 @@ nav {
       .photograph-grid-media-containerMedia img {
         width: 100%;
         height: 300px;
-        object-fit: cover; }
+        object-fit: cover;
+        cursor: pointer; }
       .photograph-grid-media-containerMedia video {
         width: 100%;
         height: 300px;
@@ -399,6 +424,104 @@ nav {
         .photograph-grid-media-containerMedia_bottom span {
           color: #901c1c;
           font-size: 24px; }
+
+.modal {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* 0.5 - semi-transparent */
+  z-index: 2;
+  justify-content: center;
+  align-items: center; }
+  .modal-container {
+    max-width: 670px;
+    background: #db8876;
+    border-radius: 5px;
+    padding: 5rem; }
+    .modal-container_title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative; }
+      .modal-container_title h4 {
+        font-size: 64px; }
+      .modal-container_title span {
+        position: absolute;
+        right: 0;
+        margin-left: 30px;
+        width: 42px;
+        height: 42px;
+        display: block;
+        background: url("/media/logo/crossCloseWhite.svg") no-repeat; }
+    .modal-container_inputs {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column; }
+      .modal-container_inputs p {
+        font-size: 36px;
+        color: #312e2e;
+        font-weight: 400;
+        padding: 15px 0; }
+      .modal-container_inputs input {
+        height: 50px; }
+      .modal-container_inputs input[type="text"] {
+        font-size: 36px; }
+      .modal-container_inputs textarea {
+        height: 170px;
+        font-size: 36px; }
+      .modal-container_inputs button {
+        margin-top: 20px;
+        width: 170px;
+        background: #901c1c;
+        color: white;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 5px; }
+
+.lightboxModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 3; }
+  .lightboxModal img {
+    width: 75%;
+    height: auto;
+    object-fit: cover; }
+  .lightboxModal_left {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    background: url("/media/logo/leftArrow.svg") no-repeat;
+    width: 50px;
+    height: 50px;
+    cursor: pointer; }
+  .lightboxModal_right {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    background: url("/media/logo/rightArrow.svg") no-repeat;
+    width: 50px;
+    height: 50px;
+    cursor: pointer; }
+  .lightboxModal_cross {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    background: url("/media/logo/crossLightbox.svg") no-repeat;
+    width: 50px;
+    height: 50px;
+    cursor: pointer; }
 
 html {
   font-size: 10px; }
