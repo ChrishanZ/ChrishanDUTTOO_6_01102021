@@ -8,141 +8,65 @@ export default class Photographer {
     this.tagline = tagline;
     this.tags = tags;
     this.price = price;
-    // Collect media
     this.media = media;
   }
 
   display() {
     let li = document.createElement("li");
     let anchor = document.createElement("a");
-    anchor.href = `./photographerPage.html?id=${this.id}`; //
-
-    console.log(this.id);
-
     let img = document.createElement("img");
-    img.src = `media/PhotographersIDPhotos/${this.portrait}`;
-
-    img.alt = `Portrait représentant:  ${this.name}`;
-
     let h2 = document.createElement("h2");
-    h2.textContent = `${this.name}`;
-
     let div = document.createElement("div");
-
     let strong = document.createElement("strong");
-    strong.textContent = `${this.city}, ${this.country}`;
-
     let p = document.createElement("p");
-    p.textContent = `${this.tagline}`;
-
     let span = document.createElement("span");
-    span.textContent = `${this.price}€/jour`;
-
     let ul = document.createElement("ul");
 
-    li.appendChild(anchor);
+    anchor.href = `./photographerPage.html?id=${this.id}`; //
+    img.src = `media/PhotographersIDPhotos/${this.portrait}`;
+    img.alt = `Portrait représentant:  ${this.name}`;
+    h2.textContent = `${this.name}`;
+    strong.textContent = `${this.city}, ${this.country}`;
+    p.textContent = `${this.tagline}`;
+    span.textContent = `${this.price}€/jour`;
+
     anchor.appendChild(img);
     anchor.appendChild(h2);
-
-    li.append(div);
+    li.appendChild(anchor);
     div.appendChild(strong);
     div.appendChild(p);
     div.appendChild(span);
-    div.appendChild(ul);
     for (let i = 0; i < this.tags.length; i++) {
       let liTags = document.createElement("li");
       liTags.textContent = `#${this.tags[i]}`;
       ul.appendChild(liTags);
     }
-
+    div.appendChild(ul);
+    li.appendChild(div);
     return li;
   }
 
   displayBandeau() {
-    const container = document.querySelector("#container");
-    const divContainer = document.createElement("div");
-
+    const divContainer = document.querySelector(".photograph-bandeau");
     const divLeft = document.createElement("div");
-    divLeft.className = "photograph-bandeau-left";
-
     const divLeftInner = document.createElement("div");
-    divLeftInner.className = "photograph-bandeau-left_inner";
     const h2 = document.createElement("h2");
-    h2.textContent = `${this.name}`; // this.name
-
     const divButton = document.createElement("div");
     const h3 = document.createElement("h3");
+
+    divLeft.className = "photograph-bandeau-left";
+    divLeftInner.className = "photograph-bandeau-left_inner";
+    h2.textContent = `${this.name}`;
     h3.textContent = `Contactez-moi`;
     h3.addEventListener("click", () => {
-      divModal.style.display = "flex";
+      this.displayForm();
     });
-
-    const divModal = document.createElement("div");
-    const divFormModal = document.createElement("div");
-
-    const h4Modal = document.createElement("h4");
-    h4Modal.textContent = `Contactez-moi ${this.name}`;
-    const cross = document.createElement("span");
-    cross.addEventListener("click", () => {
-      divModal.style.display = "none";
-    });
-    const divTitle = document.createElement("div");
-    divTitle.classList = "modal-container_title";
-
-    divTitle.appendChild(h4Modal);
-    divTitle.appendChild(cross);
-
-    const divFormModalContainer = document.createElement("div");
-
-    const pModalPrenom = document.createElement("p");
-    const inputPrenom = document.createElement("input");
-    inputPrenom.setAttribute("type", "text");
-    const pModalNom = document.createElement("p");
-    const inputNom = document.createElement("input");
-    inputNom.setAttribute("type", "text");
-    const pModalEmail = document.createElement("p");
-    const inputEmail = document.createElement("input");
-    inputEmail.setAttribute("type", "text");
-    const pModalMsg = document.createElement("p");
-    const inputMsg = document.createElement("textarea");
-
-    const buttonSend = document.createElement("button");
-    buttonSend.textContent = `Envoyer`;
-
-    pModalPrenom.textContent = `Prénom`;
-    pModalNom.textContent = `Nom`;
-    pModalEmail.textContent = `Email`;
-    pModalMsg.textContent = `Votre Message`;
-
-    divFormModalContainer.appendChild(pModalPrenom);
-    divFormModalContainer.appendChild(inputPrenom);
-    divFormModalContainer.appendChild(pModalNom);
-    divFormModalContainer.appendChild(inputNom);
-    divFormModalContainer.appendChild(pModalEmail);
-    divFormModalContainer.appendChild(inputEmail);
-    divFormModalContainer.appendChild(pModalMsg);
-    divFormModalContainer.appendChild(inputMsg);
-
-    divFormModalContainer.appendChild(buttonSend);
-
-    divModal.classList = "modal";
-    divFormModal.classList = "modal-container";
-    divFormModalContainer.classList = "modal-container_inputs";
-
-    divFormModal.appendChild(divTitle);
-    divFormModal.appendChild(divFormModalContainer);
-    divModal.appendChild(divFormModal);
-    container.appendChild(divModal);
-
-    // ----
 
     const strong = document.createElement("strong");
-    strong.textContent = `${this.city}, ${this.country}`;
-
     const p = document.createElement("p");
-    p.textContent = `${this.tagline}`;
-
     const ul = document.createElement("ul");
+    strong.textContent = `${this.city}, ${this.country}`;
+    p.textContent = `${this.tagline}`;
     for (let i = 0; i < this.tags.length; i++) {
       let liTags = document.createElement("li");
       liTags.textContent = `#${this.tags[i]}`;
@@ -152,7 +76,6 @@ export default class Photographer {
     divLeftInner.appendChild(h2);
     divButton.appendChild(h3);
     divLeftInner.appendChild(divButton);
-
     divLeft.appendChild(divLeftInner);
     divLeft.appendChild(strong);
     divLeft.appendChild(p);
@@ -165,23 +88,36 @@ export default class Photographer {
     img.alt = `Portrait représentant:  ${this.name}`;
 
     divRight.appendChild(img);
-
-    divContainer.className = "photograph-bandeau";
     divContainer.appendChild(divLeft);
     divContainer.appendChild(divRight);
-    container.appendChild(divContainer);
+  }
+
+  displayForm() {
+    const divModal = document.querySelector(".modal");
+    const h4Modal = document.querySelector(".modal-container_title h4");
+    const cross = document.querySelector("span");
+    const pModalPrenom = document.querySelector("#prenom");
+    const pModalNom = document.querySelector("#nom");
+    const pModalEmail = document.querySelector("#mail");
+    const pModalMsg = document.querySelector("#message");
+    const buttonSend = document.querySelector("button");
+
+    h4Modal.textContent = `Contactez-moi ${this.name}`;
+    divModal.style.display = "flex";
+    cross.addEventListener("click", () => {
+      divModal.style.display = "none";
+    });
+
+    buttonSend.textContent = `Envoyer`;
+    pModalPrenom.textContent = `Prénom`;
+    pModalNom.textContent = `Nom`;
+    pModalEmail.textContent = `Email`;
+    pModalMsg.textContent = `Votre Message`;
   }
 
   displayCard(likes) {
-    const container = document.querySelector("#container");
-    const div = document.createElement("div");
-    div.className = "photograph-card";
-    const p = document.createElement("p");
-    p.textContent = `${likes} ♥`;
-    const pSecond = document.createElement("p");
-    pSecond.textContent = `${this.price}€ / jour`;
-    div.appendChild(p);
-    div.appendChild(pSecond);
-    container.appendChild(div);
+    const containerCard = document.querySelector(".photograph-card");
+    containerCard.firstChild.textContent = `${likes} ♥`;
+    containerCard.lastChild.textContent = `${this.price}€ / jour`;
   }
 }

@@ -352,7 +352,7 @@ nav {
           display: block;
           border-top: 2px solid white;
           border-left: 2px solid white;
-          transform: rotate(-135deg); }
+          transform: rotate(-315deg); }
     .photograph-grid-tri_buttonFirst {
       display: flex;
       justify-content: center;
@@ -441,33 +441,31 @@ nav {
     max-width: 670px;
     background: #db8876;
     border-radius: 5px;
-    padding: 5rem; }
+    padding: 3rem; }
     .modal-container_title {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       position: relative; }
       .modal-container_title h4 {
-        font-size: 64px; }
+        font-size: 54px; }
       .modal-container_title span {
-        position: absolute;
-        right: 0;
-        margin-left: 30px;
-        width: 42px;
-        height: 42px;
         display: block;
+        margin-left: 30px;
+        width: 45px;
+        height: 45px;
         background: url("/media/logo/crossCloseWhite.svg") no-repeat; }
     .modal-container_inputs {
       margin-top: 20px;
       display: flex;
       flex-direction: column; }
       .modal-container_inputs p {
-        font-size: 36px;
+        font-size: 24px;
         color: #312e2e;
         font-weight: 400;
-        padding: 15px 0; }
+        padding: 10px 0; }
       .modal-container_inputs input {
-        height: 50px; }
+        height: 40px; }
       .modal-container_inputs input[type="text"] {
         font-size: 36px; }
       .modal-container_inputs textarea {

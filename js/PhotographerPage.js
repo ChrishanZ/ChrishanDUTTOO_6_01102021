@@ -1,8 +1,11 @@
+import Factory from "./Factory.js";
 import Photographer from "./Photographer.js";
 
 export default class PhotographerPage {
   constructor() {
     this.photographer = {};
+    this.medias = [];
+    this.lightbox = null;
   }
 
   async getPhotographer(id) {
@@ -27,224 +30,191 @@ export default class PhotographerPage {
             data.photographers[i].country,
             data.photographers[i].tags,
             data.photographers[i].tagline,
-            data.photographers[i].price,
-            mediasImages
+            data.photographers[i].price
           );
           for (let o = 0; o < mediasImages.length; o++) {
             likes += mediasImages[o].likes;
+            if (mediasImages[o].image) {
+              this.medias.push(new Factory("image", mediasImages[o]));
+            } else if (mediasImages[o].video) {
+              this.medias.push(new Factory("video", mediasImages[o]));
+            }
           }
+          // this.lightbox = new Lightbox(this.medias);
           this.photographer.displayBandeau();
           this.photographer.displayCard(likes);
+
           break;
         }
       }
+      this.displayMedias(
+        this.medias.sort(function (a, b) {
+          return b.likes - a.likes;
+        })
+      );
     } catch (e) {
       console.log("error : ", e);
     }
   }
 
   displayFilter() {
-    const container = document.querySelector("#container");
-    const div = document.createElement("div");
-    const divTri = document.createElement("div");
-    const p = document.createElement("p");
-
-    div.className = "photograph-grid";
-    divTri.className = "photograph-grid-tri";
-    p.textContent = `Trier par `;
-
-    // Menu fermer
-    const divButtonFirst = document.createElement("div");
-    const divButtonNotListed = document.createElement("div");
-    const pButtonNotListed = document.createElement("p");
-    pButtonNotListed.textContent = `Popularité`;
-    divButtonNotListed.className = "photograph-grid-tri_buttonFirst_notListed";
-    divButtonNotListed.appendChild(pButtonNotListed);
-    const spanButtonNotListed = document.createElement("span");
-
-    divButtonFirst.className = "photograph-grid-tri_buttonFirst";
-    divButtonFirst.appendChild(divButtonNotListed);
-    divButtonFirst.appendChild(spanButtonNotListed);
-
-    divTri.appendChild(p);
-    divTri.appendChild(divButtonFirst);
-    div.appendChild(divTri);
-
-    //Menu Ouvert
-    const divButton = document.createElement("div");
-    const divButtonList = document.createElement("div");
-    const pButtonPopularite = document.createElement("p");
-    const pButtonDate = document.createElement("p");
-    const pButtonTitre = document.createElement("p");
-    const spanButton = document.createElement("span");
-
-    pButtonPopularite.textContent = `Popularité`;
-    pButtonDate.textContent = `Date`;
-    pButtonTitre.textContent = `Titre`;
-
-    pButtonPopularite.addEventListener("click", () => {
-      this.deleteDomMedia();
-      this.displayMedia(arrayMediasLikes);
-    });
-    pButtonDate.addEventListener("click", () => {
-      this.deleteDomMedia();
-      this.displayMedia(arrayMediasDate);
-    });
-    pButtonTitre.addEventListener("click", () => {
-      this.deleteDomMedia();
-      this.displayMedia(arrayMediasName);
-    });
-
-    divButton.className = "photograph-grid-tri_button";
-    divButtonList.className = "photograph-grid-tri_button_list";
-
-    divButtonList.appendChild(pButtonPopularite);
-    divButtonList.appendChild(pButtonDate);
-    divButtonList.appendChild(pButtonTitre);
-
-    divButton.appendChild(divButtonList);
-    divButton.appendChild(spanButton);
-
-    divTri.appendChild(divButton);
-    div.appendChild(divTri);
-
-    container.appendChild(div);
-
-    const arrowOuvrir = document.querySelector(
-      ".photograph-grid-tri_buttonFirst span"
+    const filterTextClickedPopularite = document.querySelector("#popularite");
+    const filterTextClickedDate = document.querySelector("#date");
+    const filterTextClickedTitre = document.querySelector("#titre");
+    const arrowOuverte = document.querySelector(
+      ".photograph-grid-tri_buttonFirst"
     );
-    const arrowFermer = document.querySelector(
-      ".photograph-grid-tri_button span"
-    );
+    const arrowFermer = document.querySelector(".photograph-grid-tri_button");
     const menuOuvert = document.querySelector(".photograph-grid-tri_button");
     const menuFermer = document.querySelector(
       ".photograph-grid-tri_buttonFirst"
     );
 
-    arrowOuvrir.parentElement.addEventListener("click", () => {
+    filterTextClickedPopularite.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.deleteDomMedia();
+      this.displayMedias(arrayMediasLikes);
+      this.updateFilter(filterTextClickedPopularite.innerText);
+    });
+    filterTextClickedDate.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.deleteDomMedia();
+      this.displayMedias(arrayMediasName);
+      this.updateFilter(filterTextClickedDate.innerText);
+    });
+    filterTextClickedTitre.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.deleteDomMedia();
+      this.displayMedias(arrayMediasDate);
+      this.updateFilter(filterTextClickedTitre.innerText);
+    });
+
+    arrowOuverte.addEventListener("click", () => {
       console.log(menuOuvert);
       menuFermer.style.display = "none";
       menuOuvert.style.display = "flex";
     });
 
-    arrowFermer.parentElement.addEventListener("click", () => {
+    arrowFermer.addEventListener("click", () => {
       console.log(menuOuvert);
       menuOuvert.style.display = "none";
       menuFermer.style.display = "flex";
     });
 
     // use slice() to copy the array and not just make a reference
-    const arrayMediasLikes = this.photographer.media.slice(0);
+    const arrayMediasLikes = this.medias.slice(0);
+    const arrayMediasName = this.medias.slice(0);
+    const arrayMediasDate = this.medias.slice(0);
     arrayMediasLikes.sort(function (a, b) {
       return b.likes - a.likes;
     });
-    console.log("likes", arrayMediasLikes);
-
-    const arrayMediasName = this.photographer.media.slice(0);
     arrayMediasName.sort(function (a, b) {
       var x = a.alt.toLowerCase();
       var y = b.alt.toLowerCase();
       return x < y ? -1 : x > y ? 1 : 0;
     });
-    console.log("name", arrayMediasName);
-
-    const arrayMediasDate = this.photographer.media.slice(0);
     arrayMediasDate.sort(function (a, b) {
       return new Date(b.date) - new Date(a.date);
     });
-    console.log("date", arrayMediasDate);
-
-    this.displayMedia(arrayMediasLikes);
   }
 
-  displayMedia(arrayMedias) {
-    const container = document.querySelector("#container");
-    const div = document.createElement("div");
+  // displayMedia(arrayMedias) {
+  //   const container = document.querySelector(".photograph-grid");
+  //   // MEDIAS
+  //   const divMedia = document.createElement("div");
+  //   divMedia.className = "photograph-grid-media";
+  //   for (let l = 0; l < arrayMedias.length; l++) {
+  //     const containerMedia = document.createElement("div");
+  //     containerMedia.className = "photograph-grid-media-containerMedia";
+  //     const vidMedia = document.createElement("video");
+  //     const imgMedia = document.createElement("img");
+  //     if (arrayMedias[l].video) {
+  //       containerMedia.appendChild(vidMedia);
+  //     } else if (arrayMedias[l].image) {
+  //       imgMedia.src = `media/artistsPictures/${arrayMedias[l].image}`;
+  //       imgMedia.alt = `${arrayMedias[l].alt}`;
 
-    // MEDIAS
-    const divMedia = document.createElement("div");
-    divMedia.className = "photograph-grid-media";
-    for (let l = 0; l < arrayMedias.length; l++) {
-      const containerMedia = document.createElement("div");
-      containerMedia.className = "photograph-grid-media-containerMedia";
-      const vidMedia = document.createElement("video");
-      const imgMedia = document.createElement("img");
-      if (arrayMedias[l].video) {
-        vidMedia.src = `media/artistsVideos/${arrayMedias[l].video}`;
-        vidMedia.addEventListener("click", () => {
-          console.log("video");
-        });
-        containerMedia.appendChild(vidMedia);
-      } else if (arrayMedias[l].image) {
-        imgMedia.src = `media/artistsPictures/${arrayMedias[l].image}`;
-        imgMedia.alt = `${arrayMedias[l].alt}`;
+  //       imgMedia.addEventListener("click", () => {
+  //         const lightboxModal = document.createElement("div");
+  //         lightboxModal.classList = "lightboxModal";
+  //         lightboxModal.style.display = "flex";
+  //         const left = document.createElement("span");
+  //         left.classList = "lightboxModal_left";
 
-        imgMedia.addEventListener("click", () => {
-          const lightboxModal = document.createElement("div");
-          lightboxModal.classList = "lightboxModal";
-          lightboxModal.style.display = "flex";
-          const left = document.createElement("span");
-          left.classList = "lightboxModal_left";
+  //         const right = document.createElement("span");
+  //         right.classList = "lightboxModal_right";
 
-          const right = document.createElement("span");
-          right.classList = "lightboxModal_right";
+  //         const cross = document.createElement("span");
+  //         cross.classList = "lightboxModal_cross";
 
-          const cross = document.createElement("span");
-          cross.classList = "lightboxModal_cross";
+  //         const lightboxImg = document.createElement("img");
+  //         lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
+  //         lightboxImg.alt = `${arrayMedias[l].alt}`;
+  //         lightboxModal.appendChild(lightboxImg);
 
-          const lightboxImg = document.createElement("img");
-          lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
-          lightboxImg.alt = `${arrayMedias[l].alt}`;
-          lightboxModal.appendChild(lightboxImg);
+  //         right.addEventListener("click", () => {
+  //           lightboxImg.remove();
+  //           l++;
+  //           lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
+  //           lightboxImg.alt = `${arrayMedias[l].alt}`;
+  //           lightboxModal.appendChild(lightboxImg);
+  //         });
 
-          right.addEventListener("click", () => {
-            lightboxImg.remove();
-            l++;
-            lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
-            lightboxImg.alt = `${arrayMedias[l].alt}`;
-            lightboxModal.appendChild(lightboxImg);
-          });
+  //         left.addEventListener("click", () => {
+  //           lightboxImg.remove();
+  //           l--;
+  //           lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
+  //           lightboxImg.alt = `${arrayMedias[l].alt}`;
+  //           lightboxModal.appendChild(lightboxImg);
+  //         });
+  //         cross.addEventListener("click", () => {
+  //           lightboxModal.style.display = "none";
+  //         });
 
-          left.addEventListener("click", () => {
-            lightboxImg.remove();
-            l--;
-            lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
-            lightboxImg.alt = `${arrayMedias[l].alt}`;
-            lightboxModal.appendChild(lightboxImg);
-          });
-          cross.addEventListener("click", () => {
-            lightboxModal.style.display = "none";
-          });
+  //         lightboxModal.appendChild(left);
 
-          lightboxModal.appendChild(left);
+  //         lightboxModal.appendChild(right);
+  //         lightboxModal.appendChild(cross);
+  //         containerMedia.appendChild(lightboxModal);
+  //       });
+  //       containerMedia.appendChild(imgMedia);
+  //     }
 
-          lightboxModal.appendChild(right);
-          lightboxModal.appendChild(cross);
-          containerMedia.appendChild(lightboxModal);
-        });
-        containerMedia.appendChild(imgMedia);
-      }
+  //     const bottomMedia = document.createElement("div");
+  //     bottomMedia.className = "photograph-grid-media-containerMedia_bottom";
 
-      const bottomMedia = document.createElement("div");
-      bottomMedia.className = "photograph-grid-media-containerMedia_bottom";
+  //     const pText = document.createElement("p");
+  //     pText.textContent = `${arrayMedias[l].alt}`;
 
-      const pText = document.createElement("p");
-      pText.textContent = `${arrayMedias[l].alt}`;
+  //     const spanLikes = document.createElement("span");
+  //     spanLikes.textContent = `${arrayMedias[l].likes} ♥`;
 
-      const spanLikes = document.createElement("span");
-      spanLikes.textContent = `${arrayMedias[l].likes} ♥`;
-
-      bottomMedia.appendChild(pText);
-      bottomMedia.appendChild(spanLikes);
-      containerMedia.appendChild(bottomMedia);
-      divMedia.appendChild(containerMedia);
-      div.appendChild(divMedia);
-      container.appendChild(div);
-    }
-  }
+  //     bottomMedia.appendChild(pText);
+  //     bottomMedia.appendChild(spanLikes);
+  //     containerMedia.appendChild(bottomMedia);
+  //     divMedia.appendChild(containerMedia);
+  //     container.appendChild(divMedia);
+  //   }
+  // }
 
   deleteDomMedia() {
-    const containerMedia = document.querySelector(".photograph-grid-media");
-    containerMedia.remove();
+    const containerMedias = document.querySelectorAll(
+      ".photograph-grid-media-containerMedia"
+    );
+    for (let i = 0; i < containerMedias.length; i++) {
+      containerMedias[i].remove();
+    }
+  }
+  updateFilter(filtre) {
+    document.querySelector(
+      ".photograph-grid-tri_buttonFirst_notListed p"
+    ).textContent = `${filtre}`;
+  }
+
+  displayMedias(medias) {
+    const divMedia = document.querySelector(".photograph-grid-media");
+    for (let i = 0; i < medias.length; i++) {
+      divMedia.appendChild(medias[i].display());
+    }
   }
 }
