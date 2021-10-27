@@ -35,6 +35,7 @@ export default class PhotographerPage {
           );
           for (let o = 0; o < mediasImages.length; o++) {
             likes += mediasImages[o].likes;
+            mediasImages[o].index;
             if (mediasImages[o].image) {
               this.medias.push(new Factory("image", mediasImages[o]));
             } else if (mediasImages[o].video) {
@@ -134,15 +135,29 @@ export default class PhotographerPage {
 
   displayMedias(medias) {
     const divMedia = document.querySelector(".photograph-grid-media");
-    for (let i = 0; i < medias.length; i++) {
-      medias[i].index = i;
-      const eachElem = medias[i].display();
 
-      eachElem.addEventListener("click", () => {
-        this.lightbox.start(medias[i].index);
+    for (let i = 0; i < medias.length; i++) {
+      const divMediaEach = document.createElement("div");
+      divMediaEach.classList = "photograph-grid-media-containerMedia";
+      divMediaEach.appendChild(medias[i].display());
+
+      divMediaEach.addEventListener("click", () => {
         this.lightbox.display(this.medias[i]);
       });
-      divMedia.appendChild(eachElem);
+
+      const bottomMedia = document.createElement("div");
+      bottomMedia.className = "photograph-grid-media-containerMedia_bottom";
+
+      const pText = document.createElement("p");
+      pText.textContent = `${medias[i].alt}`;
+
+      const spanLikes = document.createElement("span");
+      spanLikes.textContent = `${medias[i].likes} ♥`;
+      bottomMedia.appendChild(pText);
+      bottomMedia.appendChild(spanLikes);
+      divMediaEach.appendChild(bottomMedia);
+
+      divMedia.appendChild(divMediaEach);
     }
   }
 }

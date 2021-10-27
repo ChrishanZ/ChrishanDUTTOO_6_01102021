@@ -28,8 +28,13 @@ export default class Lightbox {
   display(media) {
     const lightboxModal = document.querySelector(".lightboxModal");
     lightboxModal.style.display = "flex";
+
+    const containerMedia = document.createElement("div");
+    containerMedia.classList = "test";
+
     const left = document.querySelector(".lightboxModal_left");
     const right = document.querySelector(".lightboxModal_right");
+    const cross = document.querySelector(".lightboxModal_cross");
     left.addEventListener("click", () => {
       this.deleteDom();
       this.prev();
@@ -38,7 +43,6 @@ export default class Lightbox {
       this.deleteDom();
       this.next();
     });
-    const cross = document.querySelector(".lightboxModal_cross");
     cross.addEventListener("click", () => {
       this.deleteDom();
       lightboxModal.style.display = "none";
@@ -49,12 +53,16 @@ export default class Lightbox {
     // typeOF , instanceof  pour check si img ou video
   }
   deleteDom() {
-    const lightboxModal = document.querySelector(".lightboxModal");
-    const lightboxModalContent = lightboxModal.querySelector(
-      ".photograph-grid-media-containerMedia"
-    );
-    if (lightboxModalContent) {
-      lightboxModalContent.remove();
-    }
+    const lightboxModalImg = document.querySelector(".lightboxModal img");
+    const lightboxModalVid = document.querySelector(".lightboxModal video");
+
+    // lightboxModalImg.remove();
+
+    // lightboxModalVid.remove();
+
+    // for (let i = 0; i < lightboxModalImg.length; i++) {
+    //   lightboxModalVid[i].remove();
+    // }
+    console.log(lightboxModalImg);
   }
 }
