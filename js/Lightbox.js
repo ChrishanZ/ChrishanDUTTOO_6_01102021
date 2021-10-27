@@ -8,24 +8,7 @@ export default class Lightbox {
 
   start(index) {
     this.position = index;
-  } // prends un index qui affiche la lightbox à partir de cet index
-  next() {
-    if (this.position === this.medias.length - 1) {
-      this.position = 0;
-    } else {
-      this.position++;
-    }
-    this.display(this.medias[this.position]);
-  } // + 1 et si max go a maxlength arriver à 0
-  prev() {
-    if (this.position === 0) {
-      this.position = this.medias.length - 1;
-    } else {
-      this.position--;
-    }
-    this.display(this.medias[this.position]);
-  } // - 1 et si max go a 0  afficher maxlength
-  display(media) {
+
     const lightboxModal = document.querySelector(".lightboxModal");
     lightboxModal.style.display = "flex";
 
@@ -48,21 +31,38 @@ export default class Lightbox {
       lightboxModal.style.display = "none";
     });
 
-    const eachElem = media.display();
-    lightboxModal.appendChild(eachElem);
+    const elem = this.medias[this.position].display();
+    lightboxModal.appendChild(elem);
+  } // prends un index qui affiche la lightbox à partir de cet index
+  next() {
+    if (this.position === this.medias.length - 1) {
+      this.position = 0;
+    } else {
+      this.position++;
+    }
+    this.display();
+  } // + 1 et si max go a maxlength arriver à 0
+  prev() {
+    if (this.position === 0) {
+      this.position = this.medias.length - 1;
+    } else {
+      this.position--;
+    }
+    this.display();
+  } // - 1 et si max go a 0  afficher maxlength
+  display() {
+    const lightboxModal = document.querySelector(".lightboxModal");
+    lightboxModal.appendChild(this.medias[this.position].display());
     // typeOF , instanceof  pour check si img ou video
   }
   deleteDom() {
     const lightboxModalImg = document.querySelector(".lightboxModal img");
     const lightboxModalVid = document.querySelector(".lightboxModal video");
 
-    // lightboxModalImg.remove();
-
-    // lightboxModalVid.remove();
-
-    // for (let i = 0; i < lightboxModalImg.length; i++) {
-    //   lightboxModalVid[i].remove();
-    // }
-    console.log(lightboxModalImg);
+    if (lightboxModalImg !== null) {
+      lightboxModalImg.remove();
+    } else if (lightboxModalVid !== null) {
+      lightboxModalVid.remove();
+    }
   }
 }

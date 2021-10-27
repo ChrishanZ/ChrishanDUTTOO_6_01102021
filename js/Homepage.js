@@ -36,7 +36,6 @@ export default class Homepage {
     container.appendChild(ul);
     for (let i = 0; i < this.displayedPhotographers.length; i++) {
       ul.appendChild(this.displayedPhotographers[i].display());
-      console.log("test");
     }
   }
   // parcourir la boucle de l'ensemble des photosgraphers
@@ -49,11 +48,8 @@ export default class Homepage {
     }
     this.tags = [...new Set(this.tags)];
     this.tags.unshift("all");
-    console.log(this.tags);
   }
   filterTags(tag) {
-    console.log(tag);
-    console.log(this.photographersList);
     if (tag !== "all") {
       this.displayedPhotographers = this.photographersList.filter(
         (photographer) => photographer.tags.includes(tag)
@@ -70,7 +66,6 @@ export default class Homepage {
     }
 
     this.displayPhotographers();
-    console.log(this.displayedPhotographers);
   }
   resetColorTags() {
     let navigation = document.getElementById("navigation");

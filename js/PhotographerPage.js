@@ -35,13 +35,16 @@ export default class PhotographerPage {
           );
           for (let o = 0; o < mediasImages.length; o++) {
             likes += mediasImages[o].likes;
-            mediasImages[o].index;
             if (mediasImages[o].image) {
               this.medias.push(new Factory("image", mediasImages[o]));
             } else if (mediasImages[o].video) {
               this.medias.push(new Factory("video", mediasImages[o]));
             }
           }
+          for (let j = 0; j < this.medias.length; j++) {
+            this.medias[j].index = j;
+          }
+
           this.lightbox = new Lightbox(this.medias);
           this.photographer.displayBandeau();
           this.photographer.displayCard(likes);
@@ -91,13 +94,11 @@ export default class PhotographerPage {
     });
 
     arrowOuverte.addEventListener("click", () => {
-      console.log(menuOuvert);
       menuFermer.style.display = "none";
       menuOuvert.style.display = "flex";
     });
 
     arrowFermer.addEventListener("click", () => {
-      console.log(menuOuvert);
       menuOuvert.style.display = "none";
       menuFermer.style.display = "flex";
     });
@@ -142,7 +143,7 @@ export default class PhotographerPage {
       divMediaEach.appendChild(medias[i].display());
 
       divMediaEach.addEventListener("click", () => {
-        this.lightbox.display(this.medias[i]);
+        this.lightbox.start(this.medias[i].index);
       });
 
       const bottomMedia = document.createElement("div");

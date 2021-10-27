@@ -105,7 +105,6 @@ export default class Photographer {
     h4Modal.textContent = `Contactez-moi ${this.name}`;
     divModal.style.display = "flex";
     cross.addEventListener("click", () => {
-      console.log("close");
       divModal.style.display = "none";
     });
 
