@@ -17,10 +17,6 @@ export default class Image {
     imgMedia.src = `media/artistsPictures/${this.image}`;
     imgMedia.alt = `${this.alt}`;
 
-    imgMedia.addEventListener("click", () => {
-      console.log("lightbox image");
-    });
-
     const bottomMedia = document.createElement("div");
     bottomMedia.className = "photograph-grid-media-containerMedia_bottom";
 

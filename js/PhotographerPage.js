@@ -1,4 +1,5 @@
 import Factory from "./Factory.js";
+import Lightbox from "./Lightbox.js";
 import Photographer from "./Photographer.js";
 
 export default class PhotographerPage {
@@ -40,10 +41,9 @@ export default class PhotographerPage {
               this.medias.push(new Factory("video", mediasImages[o]));
             }
           }
-          // this.lightbox = new Lightbox(this.medias);
+          this.lightbox = new Lightbox(this.medias);
           this.photographer.displayBandeau();
           this.photographer.displayCard(likes);
-
           break;
         }
       }
@@ -118,85 +118,6 @@ export default class PhotographerPage {
     });
   }
 
-  // displayMedia(arrayMedias) {
-  //   const container = document.querySelector(".photograph-grid");
-  //   // MEDIAS
-  //   const divMedia = document.createElement("div");
-  //   divMedia.className = "photograph-grid-media";
-  //   for (let l = 0; l < arrayMedias.length; l++) {
-  //     const containerMedia = document.createElement("div");
-  //     containerMedia.className = "photograph-grid-media-containerMedia";
-  //     const vidMedia = document.createElement("video");
-  //     const imgMedia = document.createElement("img");
-  //     if (arrayMedias[l].video) {
-  //       containerMedia.appendChild(vidMedia);
-  //     } else if (arrayMedias[l].image) {
-  //       imgMedia.src = `media/artistsPictures/${arrayMedias[l].image}`;
-  //       imgMedia.alt = `${arrayMedias[l].alt}`;
-
-  //       imgMedia.addEventListener("click", () => {
-  //         const lightboxModal = document.createElement("div");
-  //         lightboxModal.classList = "lightboxModal";
-  //         lightboxModal.style.display = "flex";
-  //         const left = document.createElement("span");
-  //         left.classList = "lightboxModal_left";
-
-  //         const right = document.createElement("span");
-  //         right.classList = "lightboxModal_right";
-
-  //         const cross = document.createElement("span");
-  //         cross.classList = "lightboxModal_cross";
-
-  //         const lightboxImg = document.createElement("img");
-  //         lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
-  //         lightboxImg.alt = `${arrayMedias[l].alt}`;
-  //         lightboxModal.appendChild(lightboxImg);
-
-  //         right.addEventListener("click", () => {
-  //           lightboxImg.remove();
-  //           l++;
-  //           lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
-  //           lightboxImg.alt = `${arrayMedias[l].alt}`;
-  //           lightboxModal.appendChild(lightboxImg);
-  //         });
-
-  //         left.addEventListener("click", () => {
-  //           lightboxImg.remove();
-  //           l--;
-  //           lightboxImg.src = `media/artistsPictures/${arrayMedias[l].image}`;
-  //           lightboxImg.alt = `${arrayMedias[l].alt}`;
-  //           lightboxModal.appendChild(lightboxImg);
-  //         });
-  //         cross.addEventListener("click", () => {
-  //           lightboxModal.style.display = "none";
-  //         });
-
-  //         lightboxModal.appendChild(left);
-
-  //         lightboxModal.appendChild(right);
-  //         lightboxModal.appendChild(cross);
-  //         containerMedia.appendChild(lightboxModal);
-  //       });
-  //       containerMedia.appendChild(imgMedia);
-  //     }
-
-  //     const bottomMedia = document.createElement("div");
-  //     bottomMedia.className = "photograph-grid-media-containerMedia_bottom";
-
-  //     const pText = document.createElement("p");
-  //     pText.textContent = `${arrayMedias[l].alt}`;
-
-  //     const spanLikes = document.createElement("span");
-  //     spanLikes.textContent = `${arrayMedias[l].likes} ♥`;
-
-  //     bottomMedia.appendChild(pText);
-  //     bottomMedia.appendChild(spanLikes);
-  //     containerMedia.appendChild(bottomMedia);
-  //     divMedia.appendChild(containerMedia);
-  //     container.appendChild(divMedia);
-  //   }
-  // }
-
   deleteDomMedia() {
     const containerMedias = document.querySelectorAll(
       ".photograph-grid-media-containerMedia"
@@ -214,7 +135,14 @@ export default class PhotographerPage {
   displayMedias(medias) {
     const divMedia = document.querySelector(".photograph-grid-media");
     for (let i = 0; i < medias.length; i++) {
-      divMedia.appendChild(medias[i].display());
+      medias[i].index = i;
+      const eachElem = medias[i].display();
+
+      eachElem.addEventListener("click", () => {
+        this.lightbox.start(medias[i].index);
+        this.lightbox.display(this.medias[i]);
+      });
+      divMedia.appendChild(eachElem);
     }
   }
 }

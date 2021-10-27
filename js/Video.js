@@ -16,9 +16,6 @@ export default class Video {
     const vidMedia = document.createElement("video");
     vidMedia.src = `media/artistsVideos/${this.video}`;
     vidMedia.type = "video/mp4";
-    vidMedia.addEventListener("click", () => {
-      console.log("lightbox video");
-    });
 
     const bottomMedia = document.createElement("div");
     bottomMedia.className = "photograph-grid-media-containerMedia_bottom";

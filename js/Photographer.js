@@ -95,7 +95,7 @@ export default class Photographer {
   displayForm() {
     const divModal = document.querySelector(".modal");
     const h4Modal = document.querySelector(".modal-container_title h4");
-    const cross = document.querySelector("span");
+    const cross = document.querySelector("#cross");
     const pModalPrenom = document.querySelector("#prenom");
     const pModalNom = document.querySelector("#nom");
     const pModalEmail = document.querySelector("#mail");
@@ -105,6 +105,7 @@ export default class Photographer {
     h4Modal.textContent = `Contactez-moi ${this.name}`;
     divModal.style.display = "flex";
     cross.addEventListener("click", () => {
+      console.log("close");
       divModal.style.display = "none";
     });
 
