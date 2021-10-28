@@ -141,8 +141,9 @@ export default class PhotographerPage {
       const divMediaEach = document.createElement("div");
       divMediaEach.classList = "photograph-grid-media-containerMedia";
       divMediaEach.appendChild(medias[i].display());
+      const divMediaEachFirstChild = divMediaEach.firstChild;
 
-      divMediaEach.addEventListener("click", () => {
+      divMediaEachFirstChild.addEventListener("click", () => {
         this.lightbox.start(this.medias[i].index);
       });
 
@@ -153,9 +154,23 @@ export default class PhotographerPage {
       pText.textContent = `${medias[i].alt}`;
 
       const spanLikes = document.createElement("span");
+
+      spanLikes.addEventListener("click", () => {
+        spanLikes.textContent = `${medias[i].likes++} ♥`;
+        let wholeLikes = 0;
+
+        for (let j = 0; j < medias.length; j++) {
+          wholeLikes += medias[j].likes;
+        }
+        this.photographer.displayCard(wholeLikes);
+
+        console.log("medias", medias);
+        console.log("this medias", this.medias);
+      });
       spanLikes.textContent = `${medias[i].likes} ♥`;
       bottomMedia.appendChild(pText);
       bottomMedia.appendChild(spanLikes);
+
       divMediaEach.appendChild(bottomMedia);
 
       divMedia.appendChild(divMediaEach);
