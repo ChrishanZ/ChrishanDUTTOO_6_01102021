@@ -30,8 +30,7 @@ export default class Lightbox {
       lightboxModal.style.display = "none";
     });
 
-    const elem = this.medias[this.position].display();
-    lightboxModal.appendChild(elem);
+    lightboxModal.appendChild(this.display());
   }
   next() {
     if (this.position === this.medias.length - 1) {
@@ -52,14 +51,21 @@ export default class Lightbox {
   display() {
     const lightboxModal = document.querySelector(".lightboxModal");
     lightboxModal.appendChild(this.medias[this.position].display());
+
+    const p = document.createElement("p");
+    p.textContent = this.medias[this.position].alt;
+    lightboxModal.appendChild(p);
   }
   deleteDom() {
     const lightboxModalImg = document.querySelector(".lightboxModal img");
     const lightboxModalVid = document.querySelector(".lightboxModal video");
+    const lightboxModalText = document.querySelector(".lightboxModal p");
 
     if (lightboxModalImg !== null) {
       lightboxModalImg.remove();
+      lightboxModalText.remove();
     } else if (lightboxModalVid !== null) {
+      lightboxModalText.remove();
       lightboxModalVid.remove();
     }
   }

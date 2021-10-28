@@ -497,6 +497,11 @@ nav {
     max-height: 70%;
     height: auto;
     object-fit: cover; }
+  .lightboxModal p {
+    padding: 1rem;
+    justify-self: flex-start;
+    color: #901c1c;
+    font-size: 24px; }
   .lightboxModal video {
     width: 70%;
     height: auto;
