@@ -9,11 +9,10 @@ export default class Lightbox {
   start(index) {
     this.position = index;
 
+    console.log(this.position);
+    console.log(this.medias);
     const lightboxModal = document.querySelector(".lightboxModal");
     lightboxModal.style.display = "flex";
-
-    const containerMedia = document.createElement("div");
-    containerMedia.classList = "test";
 
     const left = document.querySelector(".lightboxModal_left");
     const right = document.querySelector(".lightboxModal_right");
@@ -33,7 +32,7 @@ export default class Lightbox {
 
     const elem = this.medias[this.position].display();
     lightboxModal.appendChild(elem);
-  } // prends un index qui affiche la lightbox à partir de cet index
+  }
   next() {
     if (this.position === this.medias.length - 1) {
       this.position = 0;
@@ -41,7 +40,7 @@ export default class Lightbox {
       this.position++;
     }
     this.display();
-  } // + 1 et si max go a maxlength arriver à 0
+  }
   prev() {
     if (this.position === 0) {
       this.position = this.medias.length - 1;
@@ -49,11 +48,10 @@ export default class Lightbox {
       this.position--;
     }
     this.display();
-  } // - 1 et si max go a 0  afficher maxlength
+  }
   display() {
     const lightboxModal = document.querySelector(".lightboxModal");
     lightboxModal.appendChild(this.medias[this.position].display());
-    // typeOF , instanceof  pour check si img ou video
   }
   deleteDom() {
     const lightboxModalImg = document.querySelector(".lightboxModal img");

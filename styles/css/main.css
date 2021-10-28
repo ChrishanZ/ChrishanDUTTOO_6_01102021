@@ -494,6 +494,7 @@ nav {
   z-index: 3; }
   .lightboxModal img {
     width: 70%;
+    max-height: 70%;
     height: auto;
     object-fit: cover; }
   .lightboxModal video {

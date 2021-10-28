@@ -41,11 +41,9 @@ export default class PhotographerPage {
               this.medias.push(new Factory("video", mediasImages[o]));
             }
           }
-          for (let j = 0; j < this.medias.length; j++) {
-            this.medias[j].index = j;
-          }
 
           this.lightbox = new Lightbox(this.medias);
+          console.log("this.lightbox :", this.lightbox);
           this.photographer.displayBandeau();
           this.photographer.displayCard(likes);
           break;
@@ -82,6 +80,8 @@ export default class PhotographerPage {
       });
       this.displayMedias(arrayMediasLikes);
       this.updateFilter(filterTextClickedPopularite.innerText);
+      this.lightbox = new Lightbox(arrayMediasLikes);
+      console.log("this.lightbox tri :", this.lightbox);
     });
     filterTextClickedDate.addEventListener("click", (e) => {
       e.preventDefault();
@@ -93,6 +93,8 @@ export default class PhotographerPage {
       });
       this.displayMedias(arrayMediasName);
       this.updateFilter(filterTextClickedDate.innerText);
+      this.lightbox = new Lightbox(arrayMediasName);
+      console.log("this.lightbox tri :", this.lightbox);
     });
     filterTextClickedTitre.addEventListener("click", (e) => {
       e.preventDefault();
@@ -102,6 +104,8 @@ export default class PhotographerPage {
       });
       this.displayMedias(arrayMediasDate);
       this.updateFilter(filterTextClickedTitre.innerText);
+      this.lightbox = new Lightbox(arrayMediasDate);
+      console.log("this.lightbox tri :", this.lightbox);
     });
 
     arrowOuverte.addEventListener("click", () => {
@@ -143,10 +147,10 @@ export default class PhotographerPage {
       divMediaEach.appendChild(medias[i].display());
       const divMediaEachFirstChild = divMediaEach.firstChild;
 
+      medias[i].index = i;
+
       divMediaEachFirstChild.addEventListener("click", () => {
-        console.log("start ", this.medias[i].index);
-        console.log("medias ", this.medias[i]);
-        this.lightbox.start(this.medias[i].index);
+        this.lightbox.start(medias[i].index);
       });
 
       const bottomMedia = document.createElement("div");
@@ -169,7 +173,6 @@ export default class PhotographerPage {
         console.log("medias", medias);
         console.log("this medias", this.medias);
       });
-
       bottomMedia.appendChild(pText);
       bottomMedia.appendChild(spanLikes);
 
