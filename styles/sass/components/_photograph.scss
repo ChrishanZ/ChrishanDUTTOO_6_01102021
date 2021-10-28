@@ -4,6 +4,9 @@
     justify-content: space-between;
     padding: 4rem 2rem;
     background: #fafafa;
+    @include m1023 {
+      position: relative;
+    }
 
     &-left {
       &_inner {
@@ -11,7 +14,10 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 10px;
-
+        @include m1023 {
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
         div {
           font-size: 20px;
           color: white;
@@ -67,6 +73,11 @@
     }
 
     &-right {
+      @include m1023 {
+        position: absolute;
+        right: 0;
+        top: 10px;
+      }
       img {
         width: 200px;
         height: 200px;

@@ -125,4 +125,51 @@
     cursor: pointer;
     z-index: 1;
   }
+
+  @include m1023 {
+    display: none;
+    flex-direction: column;
+
+    img {
+      width: 70%;
+      max-height: 70%;
+      height: auto;
+      object-fit: cover;
+    }
+    p {
+      padding: 1rem;
+      justify-self: flex-start;
+      color: #901c1c;
+      font-size: 14px;
+    }
+    video {
+      width: 70%;
+      height: auto;
+      object-fit: cover;
+    }
+    &_left {
+      position: absolute;
+      top: 46%;
+      left: 5%;
+      background: url("/media/logo/leftArrowMobile.svg") no-repeat;
+      width: 15px;
+      height: 15px;
+    }
+    &_right {
+      position: absolute;
+      top: 46%;
+      right: 5%;
+      background: url("/media/logo/rightArrowMobile.svg") no-repeat;
+      width: 15px;
+      height: 15px;
+    }
+    &_cross {
+      position: absolute;
+      top: 36%;
+      right: 5%;
+      background: url("/media/logo/crossLightboxMobile.svg") no-repeat;
+      width: 15px;
+      height: 15px;
+    }
+  }
 }
