@@ -96,10 +96,6 @@ export default class Photographer {
     const divModal = document.querySelector(".modal");
     const h4Modal = document.querySelector(".modal-container_title h4");
     const cross = document.querySelector("#cross");
-    const pModalPrenom = document.querySelector("#prenom");
-    const pModalNom = document.querySelector("#nom");
-    const pModalEmail = document.querySelector("#mail");
-    const pModalMsg = document.querySelector("#message");
     const prenomInput = document.querySelector("#prenomInput");
     const nomInput = document.querySelector("#nomInput");
     const emailInput = document.querySelector("#mailInput");
@@ -112,16 +108,10 @@ export default class Photographer {
       divModal.style.display = "none";
     });
 
-    buttonSend.textContent = `Envoyer`;
-    pModalPrenom.textContent = `Prénom`;
-    pModalNom.textContent = `Nom`;
-    pModalEmail.textContent = `Email`;
-    pModalMsg.textContent = `Votre Message`;
-
     buttonSend.addEventListener("click", () => {
       console.log("Prénom : ", prenomInput.value);
       console.log("Nom : ", nomInput.value);
-      console.log("Mail : ", mailInput.value);
+      console.log("Mail : ", emailInput.value);
       console.log("Message : ", messageInput.value);
     });
   }
