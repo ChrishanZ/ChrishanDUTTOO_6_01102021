@@ -493,7 +493,11 @@ nav {
   align-items: center;
   z-index: 3; }
   .lightboxModal img {
-    width: 75%;
+    width: 70%;
+    height: auto;
+    object-fit: cover; }
+  .lightboxModal video {
+    width: 70%;
     height: auto;
     object-fit: cover; }
   .lightboxModal_left {

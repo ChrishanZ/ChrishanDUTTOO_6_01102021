@@ -77,18 +77,29 @@ export default class PhotographerPage {
     filterTextClickedPopularite.addEventListener("click", (e) => {
       e.preventDefault();
       this.deleteDomMedia();
+      arrayMediasLikes.sort(function (a, b) {
+        return b.likes - a.likes;
+      });
       this.displayMedias(arrayMediasLikes);
       this.updateFilter(filterTextClickedPopularite.innerText);
     });
     filterTextClickedDate.addEventListener("click", (e) => {
       e.preventDefault();
       this.deleteDomMedia();
+      arrayMediasName.sort(function (a, b) {
+        var x = a.alt.toLowerCase();
+        var y = b.alt.toLowerCase();
+        return x < y ? -1 : x > y ? 1 : 0;
+      });
       this.displayMedias(arrayMediasName);
       this.updateFilter(filterTextClickedDate.innerText);
     });
     filterTextClickedTitre.addEventListener("click", (e) => {
       e.preventDefault();
       this.deleteDomMedia();
+      arrayMediasDate.sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
       this.displayMedias(arrayMediasDate);
       this.updateFilter(filterTextClickedTitre.innerText);
     });
@@ -107,17 +118,6 @@ export default class PhotographerPage {
     const arrayMediasLikes = this.medias.slice(0);
     const arrayMediasName = this.medias.slice(0);
     const arrayMediasDate = this.medias.slice(0);
-    arrayMediasLikes.sort(function (a, b) {
-      return b.likes - a.likes;
-    });
-    arrayMediasName.sort(function (a, b) {
-      var x = a.alt.toLowerCase();
-      var y = b.alt.toLowerCase();
-      return x < y ? -1 : x > y ? 1 : 0;
-    });
-    arrayMediasDate.sort(function (a, b) {
-      return new Date(b.date) - new Date(a.date);
-    });
   }
 
   deleteDomMedia() {
@@ -144,6 +144,8 @@ export default class PhotographerPage {
       const divMediaEachFirstChild = divMediaEach.firstChild;
 
       divMediaEachFirstChild.addEventListener("click", () => {
+        console.log("start ", this.medias[i].index);
+        console.log("medias ", this.medias[i]);
         this.lightbox.start(this.medias[i].index);
       });
 
@@ -154,11 +156,11 @@ export default class PhotographerPage {
       pText.textContent = `${medias[i].alt}`;
 
       const spanLikes = document.createElement("span");
+      spanLikes.textContent = `${medias[i].likes} ♥`;
 
       spanLikes.addEventListener("click", () => {
-        spanLikes.textContent = `${medias[i].likes++} ♥`;
+        spanLikes.textContent = `${(medias[i].likes += 1)} ♥`;
         let wholeLikes = 0;
-
         for (let j = 0; j < medias.length; j++) {
           wholeLikes += medias[j].likes;
         }
@@ -167,7 +169,7 @@ export default class PhotographerPage {
         console.log("medias", medias);
         console.log("this medias", this.medias);
       });
-      spanLikes.textContent = `${medias[i].likes} ♥`;
+
       bottomMedia.appendChild(pText);
       bottomMedia.appendChild(spanLikes);
 

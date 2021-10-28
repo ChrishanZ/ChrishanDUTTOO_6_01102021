@@ -100,6 +100,10 @@ export default class Photographer {
     const pModalNom = document.querySelector("#nom");
     const pModalEmail = document.querySelector("#mail");
     const pModalMsg = document.querySelector("#message");
+    const prenomInput = document.querySelector("#prenomInput");
+    const nomInput = document.querySelector("#nomInput");
+    const emailInput = document.querySelector("#mailInput");
+    const messageInput = document.querySelector("#messageInput");
     const buttonSend = document.querySelector("button");
 
     h4Modal.textContent = `Contactez-moi ${this.name}`;
@@ -113,6 +117,13 @@ export default class Photographer {
     pModalNom.textContent = `Nom`;
     pModalEmail.textContent = `Email`;
     pModalMsg.textContent = `Votre Message`;
+
+    buttonSend.addEventListener("click", () => {
+      console.log("Prénom : ", prenomInput.value);
+      console.log("Nom : ", nomInput.value);
+      console.log("Mail : ", mailInput.value);
+      console.log("Message : ", messageInput.value);
+    });
   }
 
   displayCard(likes) {
@@ -120,4 +131,5 @@ export default class Photographer {
     containerCard.firstChild.textContent = `${likes} ♥`;
     containerCard.lastChild.textContent = `${this.price}€ / jour`;
   }
+  // displayLikes(likes){}
 }
