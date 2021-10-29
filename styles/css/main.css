@@ -471,7 +471,7 @@ nav {
       margin-top: 20px;
       display: flex;
       flex-direction: column; }
-      .modal-container_inputs p {
+      .modal-container_inputs label {
         font-size: 24px;
         color: #312e2e;
         font-weight: 400;
