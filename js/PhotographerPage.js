@@ -42,13 +42,14 @@ export default class PhotographerPage {
             }
           }
 
-          this.lightbox = new Lightbox(this.medias);
-          console.log("this.lightbox :", this.lightbox);
-          this.photographer.displayBandeau();
-          this.photographer.displayCard(likes);
           break;
         }
       }
+
+      this.lightbox = new Lightbox(this.medias);
+      this.photographer.displayBandeau();
+      this.photographer.displayCard(likes);
+
       this.displayMedias(
         this.medias.sort(function (a, b) {
           return b.likes - a.likes;
@@ -60,6 +61,8 @@ export default class PhotographerPage {
   }
 
   displayFilter() {
+    // use slice() to copy the array and not just make a reference
+
     const filterTextClickedPopularite = document.querySelector("#popularite");
     const filterTextClickedDate = document.querySelector("#date");
     const filterTextClickedTitre = document.querySelector("#titre");
@@ -72,40 +75,33 @@ export default class PhotographerPage {
       ".photograph-grid-tri_buttonFirst"
     );
 
-    filterTextClickedPopularite.addEventListener("click", (e) => {
-      e.preventDefault();
+    filterTextClickedPopularite.addEventListener("click", () => {
       this.deleteDomMedia();
-      arrayMediasLikes.sort(function (a, b) {
+      this.medias.sort(function (a, b) {
         return b.likes - a.likes;
       });
-      this.displayMedias(arrayMediasLikes);
+      this.displayMedias(this.medias);
       this.updateFilter(filterTextClickedPopularite.innerText);
-      this.lightbox = new Lightbox(arrayMediasLikes);
-      console.log("this.lightbox tri :", this.lightbox);
     });
-    filterTextClickedDate.addEventListener("click", (e) => {
-      e.preventDefault();
+
+    filterTextClickedDate.addEventListener("click", () => {
       this.deleteDomMedia();
-      arrayMediasName.sort(function (a, b) {
+      this.medias.sort(function (a, b) {
         var x = a.alt.toLowerCase();
         var y = b.alt.toLowerCase();
         return x < y ? -1 : x > y ? 1 : 0;
       });
-      this.displayMedias(arrayMediasName);
+      this.displayMedias(this.medias);
       this.updateFilter(filterTextClickedDate.innerText);
-      this.lightbox = new Lightbox(arrayMediasName);
-      console.log("this.lightbox tri :", this.lightbox);
     });
-    filterTextClickedTitre.addEventListener("click", (e) => {
-      e.preventDefault();
+
+    filterTextClickedTitre.addEventListener("click", () => {
       this.deleteDomMedia();
-      arrayMediasDate.sort(function (a, b) {
+      this.medias.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
-      this.displayMedias(arrayMediasDate);
+      this.displayMedias(this.medias);
       this.updateFilter(filterTextClickedTitre.innerText);
-      this.lightbox = new Lightbox(arrayMediasDate);
-      console.log("this.lightbox tri :", this.lightbox);
     });
 
     arrowOuverte.addEventListener("click", () => {
@@ -117,11 +113,6 @@ export default class PhotographerPage {
       menuOuvert.style.display = "none";
       menuFermer.style.display = "flex";
     });
-
-    // use slice() to copy the array and not just make a reference
-    const arrayMediasLikes = this.medias.slice(0);
-    const arrayMediasName = this.medias.slice(0);
-    const arrayMediasDate = this.medias.slice(0);
   }
 
   deleteDomMedia() {
@@ -147,10 +138,10 @@ export default class PhotographerPage {
       divMediaEach.appendChild(medias[i].display());
       const divMediaEachFirstChild = divMediaEach.firstChild;
 
-      medias[i].index = i;
+      // medias[i].index = i;
 
       divMediaEachFirstChild.addEventListener("click", () => {
-        this.lightbox.start(medias[i].index);
+        this.lightbox.start(i);
       });
 
       const bottomMedia = document.createElement("div");
