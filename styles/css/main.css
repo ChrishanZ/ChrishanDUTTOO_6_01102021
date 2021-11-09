@@ -451,6 +451,7 @@ nav {
   justify-content: center;
   align-items: center; }
   .modal-container {
+    z-index: 3;
     max-width: 670px;
     background: #db8876;
     border-radius: 5px;

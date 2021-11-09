@@ -9,6 +9,7 @@ export default class Photographer {
     this.tags = tags;
     this.price = price;
     this.media = media;
+    this.focusedElementBeforeModal = null;
   }
 
   display() {
@@ -55,6 +56,7 @@ export default class Photographer {
     const h3 = document.createElement("h3");
     const a = document.createElement("a");
     a.tabIndex = 0;
+    a.classList.add("modal-toggle");
 
     divLeft.className = "photograph-bandeau-left";
     divLeftInner.className = "photograph-bandeau-left_inner";
@@ -99,9 +101,18 @@ export default class Photographer {
     divRight.appendChild(img);
     divContainer.appendChild(divLeft);
     divContainer.appendChild(divRight);
+
+    const modal = document.querySelector(".modal-container");
+    const modalOverlay = document.querySelector(".modal");
+
+    const modalToggle = document.querySelector(".modal-toggle");
+    modal.addEventListener("click", () => this.openModal);
   }
 
   displayForm() {
+    // Save current focus
+    this.focusedElementBeforeModal = document.activeElement;
+
     const divModal = document.querySelector(".modal");
     const h4Modal = document.querySelector(".modal-container_title h4");
     const cross = document.querySelector("#cross");
@@ -131,10 +142,29 @@ export default class Photographer {
     });
   }
 
+  openModal() {
+    // Save current focus
+    focusedElementBeforeModal = document.activeElement;
+
+    // Listen for and trap the keyboard
+    modal.addEventListener("keydown", trapTabKey);
+
+    // Listen for indicators to close the modal
+    modalOverlay.addEventListener("click", closeModal);
+    console.log("OpenModal");
+  }
+
+  closeModal() {
+    const divModal = document.querySelector(".modal");
+    divModal.style.display = "none";
+
+    // Set focus back to element that had it before the modal was opened
+    this.focusedElementBeforeModal.focus();
+  }
+
   displayCard(likes) {
     const containerCard = document.querySelector(".photograph-card");
     containerCard.firstChild.textContent = `${likes} ♥`;
     containerCard.lastChild.textContent = `${this.price}€ / jour`;
   }
-  // displayLikes(likes){}
 }
