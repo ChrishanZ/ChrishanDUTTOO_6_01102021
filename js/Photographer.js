@@ -149,9 +149,7 @@ export default class Photographer {
     const lastTabStop = focusableElements[focusableElements.length - 1];
     firstTabStop.focus();
 
-    console.log(firstTabStop);
     function trapTabKey(e) {
-      console.log("functionTrapTab");
       // Check for TAB key press
       if (e.keyCode === 9) {
         // SHIFT + TAB
@@ -178,7 +176,6 @@ export default class Photographer {
   }
 
   closeModal() {
-    console.log("closed");
     const divModal = document.querySelector(".modal");
     divModal.style.display = "none";
 

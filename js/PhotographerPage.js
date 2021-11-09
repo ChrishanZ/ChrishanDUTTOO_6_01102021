@@ -92,7 +92,6 @@ export default class PhotographerPage {
       filterTextClickedPopularite.addEventListener(
         evt,
         () => {
-          console.log(evt);
           if (evt === "click" || evt === "keypress") {
             this.deleteDomMedia();
             this.medias.sort(function (a, b) {
@@ -193,6 +192,7 @@ export default class PhotographerPage {
       pText.textContent = `${medias[i].alt}`;
 
       const spanLikes = document.createElement("span");
+      spanLikes.tabIndex = 0;
       spanLikes.textContent = `${medias[i].likes} ♥`;
 
       spanLikes.addEventListener("click", () => {
@@ -202,9 +202,16 @@ export default class PhotographerPage {
           wholeLikes += medias[j].likes;
         }
         this.photographer.displayCard(wholeLikes);
-
-        console.log("medias", medias);
-        console.log("this medias", this.medias);
+      });
+      spanLikes.addEventListener("keydown", (e) => {
+        if (e.key == "Enter") {
+          spanLikes.textContent = `${(medias[i].likes += 1)} ♥`;
+          let wholeLikes = 0;
+          for (let j = 0; j < medias.length; j++) {
+            wholeLikes += medias[j].likes;
+          }
+          this.photographer.displayCard(wholeLikes);
+        }
       });
       bottomMedia.appendChild(pText);
       bottomMedia.appendChild(spanLikes);

@@ -2,7 +2,6 @@ export default class Lightbox {
   constructor(medias) {
     this.medias = medias;
     this.position = 0;
-    console.log(this.position);
 
     const lightboxModal = document.querySelector(".lightboxModal");
     const left = document.querySelector(".lightboxModal_left");
@@ -24,32 +23,26 @@ export default class Lightbox {
 
   start(index) {
     this.position = index;
-    console.log(this.position);
 
     const lightboxModal = document.querySelector(".lightboxModal");
     lightboxModal.style.display = "flex";
     this.display();
   }
   next() {
-    console.log(this.medias);
     if (this.position === this.medias.length - 1) {
       this.position = 0;
     } else {
       this.position++;
     }
     this.display();
-    console.log(this.position);
   }
   prev() {
-    console.log(this.medias);
-
     if (this.position === 0) {
       this.position = this.medias.length - 1;
     } else {
       this.position--;
     }
     this.display();
-    console.log(this.position);
   }
   display() {
     const lightboxModal = document.querySelector(".lightboxModal");
