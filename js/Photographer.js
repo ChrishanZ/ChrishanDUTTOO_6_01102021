@@ -127,6 +127,12 @@ export default class Photographer {
         this.closeModal();
       }
     });
+    crossAref.addEventListener("keydown", (event) => {
+      if (event.keyCode == 27) {
+        this.closeModal();
+      }
+    });
+
     cross.addEventListener("click", () => {
       this.closeModal();
     });
@@ -166,11 +172,6 @@ export default class Photographer {
             firstTabStop.focus();
           }
         }
-      }
-
-      // ESCAPE
-      if (e.keyCode === 27) {
-        closeModal();
       }
     }
   }
