@@ -58,11 +58,6 @@ export default class Photographer {
     a.tabIndex = 0;
     a.classList.add("modal-toggle");
 
-    divLeft.className = "photograph-bandeau-left";
-    divLeftInner.className = "photograph-bandeau-left_inner";
-    h2.textContent = `${this.name}`;
-    h3.textContent = `Contactez-moi`;
-
     a.addEventListener("keydown", (event) => {
       if (event.key == "Enter") {
         this.displayForm();
@@ -71,6 +66,11 @@ export default class Photographer {
     a.addEventListener("click", () => {
       this.displayForm();
     });
+
+    divLeft.className = "photograph-bandeau-left";
+    divLeftInner.className = "photograph-bandeau-left_inner";
+    h2.textContent = `${this.name}`;
+    h3.textContent = `Contactez-moi`;
 
     const strong = document.createElement("strong");
     const p = document.createElement("p");
@@ -101,12 +101,6 @@ export default class Photographer {
     divRight.appendChild(img);
     divContainer.appendChild(divLeft);
     divContainer.appendChild(divRight);
-
-    const modal = document.querySelector(".modal-container");
-    const modalOverlay = document.querySelector(".modal");
-
-    const modalToggle = document.querySelector(".modal-toggle");
-    modal.addEventListener("click", () => this.openModal);
   }
 
   displayForm() {
@@ -114,6 +108,7 @@ export default class Photographer {
     this.focusedElementBeforeModal = document.activeElement;
 
     const divModal = document.querySelector(".modal");
+    const modal = document.querySelector(".modal-container");
     const h4Modal = document.querySelector(".modal-container_title h4");
     const cross = document.querySelector("#cross");
     const crossAref = document.querySelector("#crossAref");
@@ -123,15 +118,17 @@ export default class Photographer {
     const messageInput = document.querySelector("#messageInput");
     const buttonSend = document.querySelector("button");
 
+    modal.addEventListener("keydown", trapTabKey);
+
     h4Modal.textContent = `Contactez-moi ${this.name}`;
     divModal.style.display = "flex";
     crossAref.addEventListener("keydown", (event) => {
       if (event.key == "Enter") {
-        divModal.style.display = "none";
+        this.closeModal();
       }
     });
     cross.addEventListener("click", () => {
-      divModal.style.display = "none";
+      this.closeModal();
     });
 
     buttonSend.addEventListener("click", () => {
@@ -140,21 +137,48 @@ export default class Photographer {
       console.log("Mail : ", emailInput.value);
       console.log("Message : ", messageInput.value);
     });
-  }
 
-  openModal() {
-    // Save current focus
-    focusedElementBeforeModal = document.activeElement;
+    // Find all focusable children
+    const focusableElementsString =
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    let focusableElements = modal.querySelectorAll(focusableElementsString);
+    // Convert NodeList to Array
+    focusableElements = Array.prototype.slice.call(focusableElements);
 
-    // Listen for and trap the keyboard
-    modal.addEventListener("keydown", trapTabKey);
+    const firstTabStop = focusableElements[0];
+    const lastTabStop = focusableElements[focusableElements.length - 1];
+    firstTabStop.focus();
 
-    // Listen for indicators to close the modal
-    modalOverlay.addEventListener("click", closeModal);
-    console.log("OpenModal");
+    console.log(firstTabStop);
+    function trapTabKey(e) {
+      console.log("functionTrapTab");
+      // Check for TAB key press
+      if (e.keyCode === 9) {
+        // SHIFT + TAB
+        if (e.shiftKey) {
+          if (document.activeElement === firstTabStop) {
+            e.preventDefault();
+            lastTabStop.focus();
+          }
+
+          // TAB
+        } else {
+          if (document.activeElement === lastTabStop) {
+            e.preventDefault();
+            firstTabStop.focus();
+          }
+        }
+      }
+
+      // ESCAPE
+      if (e.keyCode === 27) {
+        closeModal();
+      }
+    }
   }
 
   closeModal() {
+    console.log("closed");
     const divModal = document.querySelector(".modal");
     divModal.style.display = "none";
 
