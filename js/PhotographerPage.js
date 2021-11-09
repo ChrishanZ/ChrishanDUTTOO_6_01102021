@@ -7,6 +7,19 @@ export default class PhotographerPage {
     this.photographer = {};
     this.medias = [];
     this.lightbox = null;
+
+    const filter = document.querySelector("#filter");
+    const menuOuvert = document.querySelector(".photograph-grid-tri_button");
+    const menuFermer = document.querySelector(
+      ".photograph-grid-tri_buttonFirst"
+    );
+
+    filter.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        menuFermer.style.display = "none";
+        menuOuvert.style.display = "flex";
+      }
+    });
   }
 
   async getPhotographer(id) {
@@ -75,34 +88,59 @@ export default class PhotographerPage {
       ".photograph-grid-tri_buttonFirst"
     );
 
-    filterTextClickedPopularite.addEventListener("click", () => {
-      this.deleteDomMedia();
-      this.medias.sort(function (a, b) {
-        return b.likes - a.likes;
-      });
-      this.displayMedias(this.medias);
-      this.updateFilter(filterTextClickedPopularite.innerText);
-    });
+    ["click", "keypress"].forEach((evt) =>
+      filterTextClickedPopularite.addEventListener(
+        evt,
+        () => {
+          console.log(evt);
+          if (evt === "click" || evt === "keypress") {
+            this.deleteDomMedia();
+            this.medias.sort(function (a, b) {
+              return b.likes - a.likes;
+            });
+            this.displayMedias(this.medias);
+            this.updateFilter(filterTextClickedPopularite.innerText);
+          }
+        },
+        false
+      )
+    );
 
-    filterTextClickedDate.addEventListener("click", () => {
-      this.deleteDomMedia();
-      this.medias.sort(function (a, b) {
-        var x = a.alt.toLowerCase();
-        var y = b.alt.toLowerCase();
-        return x < y ? -1 : x > y ? 1 : 0;
-      });
-      this.displayMedias(this.medias);
-      this.updateFilter(filterTextClickedDate.innerText);
-    });
+    ["click", "keypress"].forEach((evt) =>
+      filterTextClickedDate.addEventListener(
+        evt,
+        () => {
+          if (evt === "click" || evt === "keypress") {
+            this.deleteDomMedia();
+            this.medias.sort(function (a, b) {
+              var x = a.alt.toLowerCase();
+              var y = b.alt.toLowerCase();
+              return x < y ? -1 : x > y ? 1 : 0;
+            });
+            this.displayMedias(this.medias);
+            this.updateFilter(filterTextClickedDate.innerText);
+          }
+        },
+        false
+      )
+    );
 
-    filterTextClickedTitre.addEventListener("click", () => {
-      this.deleteDomMedia();
-      this.medias.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
-      });
-      this.displayMedias(this.medias);
-      this.updateFilter(filterTextClickedTitre.innerText);
-    });
+    ["click", "keypress"].forEach((evt) =>
+      filterTextClickedTitre.addEventListener(
+        evt,
+        () => {
+          if (evt === "click" || evt === "keypress") {
+            this.deleteDomMedia();
+            this.medias.sort(function (a, b) {
+              return new Date(b.date) - new Date(a.date);
+            });
+            this.displayMedias(this.medias);
+            this.updateFilter(filterTextClickedTitre.innerText);
+          }
+        },
+        false
+      )
+    );
 
     arrowOuverte.addEventListener("click", () => {
       menuFermer.style.display = "none";
@@ -138,7 +176,11 @@ export default class PhotographerPage {
       divMediaEach.appendChild(medias[i].display());
       const divMediaEachFirstChild = divMediaEach.firstChild;
 
-      // medias[i].index = i;
+      divMediaEachFirstChild.addEventListener("keydown", (event) => {
+        if (event.key == "Enter") {
+          this.lightbox.start(i);
+        }
+      });
 
       divMediaEachFirstChild.addEventListener("click", () => {
         this.lightbox.start(i);

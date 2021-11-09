@@ -4,17 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="./styles/css/main.css" />
     <title>FishEye - photographes freelances</title>
   </head>
   <body>
     <!--======BANNER======-->
     <header class="headerSimple container">
-      <a href="./index.html"
+      <a href="./index.html" tabindex="1"
         ><svg
           width="200"
           height="50"
@@ -53,8 +56,8 @@
           />
         </svg>
       </a>
-      <nav>
-        <!-- javascript ul tag -->
+
+      <!-- javascript ul tag -->
     </header>
     <!--======MAIN======-->
     <main id="container" class="containerPhotograph">
@@ -62,36 +65,38 @@
       <!-- <div class="photograph-grid-media-containerMedia">
 
       </div> -->
-      <div class="photograph-bandeau">
-      </div>
-      
+      <div class="photograph-bandeau"></div>
+
       <div class="photograph-grid">
         <div class="photograph-grid-tri">
-          <p>Trier par </p>
-          <div class="photograph-grid-tri_buttonFirst">
-            <div class="photograph-grid-tri_buttonFirst_notListed">
-              <p>Popularité</p>
+          <p>Trier par</p>
+          <a id="filter" tabindex="0">
+            <div class="photograph-grid-tri_buttonFirst">
+              <div class="photograph-grid-tri_buttonFirst_notListed">
+                <p>Popularité</p>
+              </div>
+              <span aria-label="Etendre ou détendre le menu"></span>
             </div>
-            <span></span>
-          </div>
-          <div class="photograph-grid-tri_button">
+          </a>
+
+          <div class="photograph-grid-tri_button" role="filter">
             <div class="photograph-grid-tri_button_list">
-              <p id="popularite">Popularité</p>
-              <p id="date">Date</p>
-              <p id="titre">Titre</p>
+              <a id="popularite" tabindex="0">
+                <p>Popularité</p>
+              </a>
+              <a id="date" tabindex="0">
+                <p>Date</p>
+              </a>
+              <a id="titre" tabindex="0">
+                <p>Titre</p>
+              </a>
             </div>
             <span></span>
           </div>
         </div>
-        <div class="photograph-grid-media">
-          
-        </div>
-        
+        <div class="photograph-grid-media"></div>
       </div>
-     
 
-
-     
       <div class="photograph-card">
         <p></p>
         <p></p>
@@ -100,26 +105,42 @@
         <div class="modal-container">
           <div class="modal-container_title">
             <h4></h4>
-            <span id="cross"></span>
+            <a id="crossAref" tabindex="0">
+              <span id="cross"></span>
+            </a>
           </div>
           <div class="modal-container_inputs">
             <label for="prenomInput">Prenom</label>
-            <input id="prenomInput" type="text" >
+            <input id="prenomInput" type="text" />
             <label for="nomInput">Nom</label>
-            <input id="nomInput" type="text">
+            <input id="nomInput" type="text" />
             <label for="mailInput">Email</label>
-            <input id="mailInput" type="text">
+            <input id="mailInput" type="text" />
             <label for="messageInput">Message</label>
             <textarea id="messageInput"></textarea>
-            <button>Envoyer</button>
+            <button aria-label="Envoyer">Envoyer</button>
           </div>
         </div>
       </div>
 
       <div class="lightboxModal">
-        <span class="lightboxModal_left"></span>
-        <span class="lightboxModal_right"></span>
-        <span class="lightboxModal_cross"></span>
+        <span
+          class="lightboxModal_left"
+          tabindex="0"
+          aria-label="Précédent"
+        ></span>
+
+        <span
+          class="lightboxModal_right"
+          tabindex="0"
+          aria-label="Suivant"
+        ></span>
+
+        <span
+          class="lightboxModal_cross"
+          tabindex="0"
+          aria-label="Fermer"
+        ></span>
       </div>
     </main>
     <script type="module" src="./js/indexPhotographerPage.js"></script>

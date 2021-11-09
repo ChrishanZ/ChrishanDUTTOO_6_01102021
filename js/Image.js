@@ -12,6 +12,7 @@ export default class Image {
 
   display() {
     const imgMedia = document.createElement("img");
+    imgMedia.tabIndex = 0;
     imgMedia.src = `media/artistsPictures/${this.image}`;
     imgMedia.alt = `${this.alt}`;
     return imgMedia;

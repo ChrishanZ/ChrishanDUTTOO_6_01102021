@@ -12,6 +12,7 @@ export default class Video {
 
   display() {
     const vidMedia = document.createElement("video");
+    vidMedia.tabIndex = 0;
     vidMedia.src = `media/artistsVideos/${this.video}`;
     vidMedia.type = "video/mp4";
     return vidMedia;

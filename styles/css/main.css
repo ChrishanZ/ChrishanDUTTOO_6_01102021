@@ -426,7 +426,8 @@ nav {
       .photograph-grid-media-containerMedia video {
         width: 100%;
         height: 300px;
-        object-fit: cover; }
+        object-fit: cover;
+        cursor: pointer; }
       .photograph-grid-media-containerMedia_bottom {
         display: flex;
         flex-direction: row;
@@ -498,7 +499,6 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  background: white;
   width: 100%;
   height: 100%;
   display: none;
@@ -506,7 +506,7 @@ nav {
   align-items: center;
   z-index: 3; }
   .lightboxModal img {
-    width: auto;
+    width: 70%;
     max-height: 70%;
     height: auto;
     object-fit: cover; }

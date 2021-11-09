@@ -69,18 +69,30 @@ export default class Homepage {
   }
   resetColorTags() {
     let navigation = document.getElementById("navigation");
+
     for (let i = 0; i < navigation.children.length; i++) {
-      navigation.children[i].style.backgroundColor = "white";
+      navigation.children[i].children[0].style.backgroundColor = "white";
     }
   }
   displayTags() {
     let navigation = document.getElementById("navigation");
     for (let i = 0; i < this.tags.length; i++) {
+      let a = document.createElement("a");
+      a.tabIndex = 0;
       let li = document.createElement("li");
       li.textContent = `#${this.tags[i]}`;
       li.setAttribute("id", "anchorTags");
-      navigation.appendChild(li);
-      li.addEventListener("click", (event) => {
+      a.appendChild(li);
+      navigation.appendChild(a);
+      a.addEventListener("keydown", (event) => {
+        if (event.key == "Enter") {
+          this.resetColorTags();
+          this.filterTags(this.tags[i]);
+          li.style.backgroundColor = "grey";
+        }
+      });
+
+      a.addEventListener("click", (event) => {
         this.resetColorTags();
         this.filterTags(this.tags[i]);
         li.style.backgroundColor = "grey";

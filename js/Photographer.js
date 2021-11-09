@@ -53,12 +53,20 @@ export default class Photographer {
     const h2 = document.createElement("h2");
     const divButton = document.createElement("div");
     const h3 = document.createElement("h3");
+    const a = document.createElement("a");
+    a.tabIndex = 0;
 
     divLeft.className = "photograph-bandeau-left";
     divLeftInner.className = "photograph-bandeau-left_inner";
     h2.textContent = `${this.name}`;
     h3.textContent = `Contactez-moi`;
-    h3.addEventListener("click", () => {
+
+    a.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        this.displayForm();
+      }
+    });
+    a.addEventListener("click", () => {
       this.displayForm();
     });
 
@@ -74,7 +82,8 @@ export default class Photographer {
     }
 
     divLeftInner.appendChild(h2);
-    divButton.appendChild(h3);
+    a.appendChild(h3);
+    divButton.appendChild(a);
     divLeftInner.appendChild(divButton);
     divLeft.appendChild(divLeftInner);
     divLeft.appendChild(strong);
@@ -96,6 +105,7 @@ export default class Photographer {
     const divModal = document.querySelector(".modal");
     const h4Modal = document.querySelector(".modal-container_title h4");
     const cross = document.querySelector("#cross");
+    const crossAref = document.querySelector("#crossAref");
     const prenomInput = document.querySelector("#prenomInput");
     const nomInput = document.querySelector("#nomInput");
     const emailInput = document.querySelector("#mailInput");
@@ -104,6 +114,11 @@ export default class Photographer {
 
     h4Modal.textContent = `Contactez-moi ${this.name}`;
     divModal.style.display = "flex";
+    crossAref.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        divModal.style.display = "none";
+      }
+    });
     cross.addEventListener("click", () => {
       divModal.style.display = "none";
     });
