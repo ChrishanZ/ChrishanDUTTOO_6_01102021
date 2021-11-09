@@ -41,6 +41,13 @@ export default class Lightbox {
         this.focusedElementBeforeModal.focus();
       }
     });
+    lightboxModal.addEventListener("keydown", (e) => {
+      if (e.keyCode === 27) {
+        this.deleteDom();
+        lightboxModal.style.display = "none";
+        this.focusedElementBeforeModal.focus();
+      }
+    });
   }
 
   start(index) {

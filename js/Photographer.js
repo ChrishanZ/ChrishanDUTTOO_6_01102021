@@ -127,7 +127,7 @@ export default class Photographer {
         this.closeModal();
       }
     });
-    crossAref.addEventListener("keydown", (event) => {
+    modal.addEventListener("keydown", (event) => {
       if (event.keyCode == 27) {
         this.closeModal();
       }
