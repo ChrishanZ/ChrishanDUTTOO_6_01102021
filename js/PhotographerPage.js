@@ -194,23 +194,49 @@ export default class PhotographerPage {
       const spanLikes = document.createElement("span");
       spanLikes.tabIndex = 0;
       spanLikes.textContent = `${medias[i].likes} ♥`;
-
+      let actualLike = medias[i].likes;
       spanLikes.addEventListener("click", () => {
-        spanLikes.textContent = `${(medias[i].likes += 1)} ♥`;
+        if( actualLike ===  medias[i].likes){
+        medias[i].likes += 1;
+        spanLikes.textContent = `${(medias[i].likes)} ♥`;
         let wholeLikes = 0;
         for (let j = 0; j < medias.length; j++) {
           wholeLikes += medias[j].likes;
         }
         this.photographer.displayCard(wholeLikes);
+        } else {
+        medias[i].likes -= 1;
+        spanLikes.textContent = `${(medias[i].likes)} ♥`;
+        let wholeLikes = 0;
+        for (let j = 0; j < medias.length; j++) {
+          wholeLikes += medias[j].likes;
+        }
+        this.photographer.displayCard(wholeLikes);
+        }
+        
       });
+
+
       spanLikes.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
-          spanLikes.textContent = `${(medias[i].likes += 1)} ♥`;
-          let wholeLikes = 0;
-          for (let j = 0; j < medias.length; j++) {
-            wholeLikes += medias[j].likes;
-          }
-          this.photographer.displayCard(wholeLikes);
+          if( actualLike ===  medias[i].likes){
+            medias[i].likes += 1;
+            spanLikes.textContent = `${(medias[i].likes)} ♥`;
+            let wholeLikes = 0;
+            for (let j = 0; j < medias.length; j++) {
+              wholeLikes += medias[j].likes;
+            }
+            this.photographer.displayCard(wholeLikes);
+            } else {
+            medias[i].likes -= 1;
+            spanLikes.textContent = `${(medias[i].likes)} ♥`;
+            let wholeLikes = 0;
+            for (let j = 0; j < medias.length; j++) {
+              wholeLikes += medias[j].likes;
+            }
+            this.photographer.displayCard(wholeLikes);
+            }
+            
         }
       });
       bottomMedia.appendChild(pText);
