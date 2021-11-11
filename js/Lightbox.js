@@ -46,7 +46,13 @@ export default class Lightbox {
         this.deleteDom();
         lightboxModal.style.display = "none";
         this.focusedElementBeforeModal.focus();
-      }
+      } else if (e.keyCode === 37) {
+        this.deleteDom();
+        this.prev();
+      } else if (e.keyCode === 39) {
+        this.deleteDom();
+        this.next();
+      } 
     });
   }
 
@@ -75,7 +81,6 @@ export default class Lightbox {
   }
   display() {
     this.focusedElementBeforeModal = document.activeElement;
-    console.log(this.focusedElementBeforeModal);
     const lightboxModal = document.querySelector(".lightboxModal");
     const p = document.createElement("p");
     lightboxModal.appendChild(this.medias[this.position].display());
@@ -89,9 +94,7 @@ export default class Lightbox {
       focusableElementsString
     );
     // Convert NodeList to Array
-    console.log(focusableElementsString);
     focusableElements = Array.prototype.slice.call(focusableElements);
-    console.log(focusableElements);
     const firstTabStop = focusableElements[0];
     const lastTabStop = focusableElements[focusableElements.length - 1];
 
