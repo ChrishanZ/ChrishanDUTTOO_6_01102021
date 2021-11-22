@@ -245,11 +245,6 @@ nav {
     font-weight: 400;
     color: #757575;
     margin: 10px 0; }
-  .photograph-bandeau-left span {
-    font-size: 9px;
-    font-weight: 12px;
-    color: #757575;
-    margin-bottom: 10px; }
   .photograph-bandeau-left ul {
     display: flex;
     flex-direction: row;
@@ -260,6 +255,7 @@ nav {
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: row;
       font-size: 1.2rem;
       line-height: 1.55rem;
       font-weight: 500;
@@ -267,6 +263,10 @@ nav {
       padding: 0 5px;
       margin: 0 2px;
       border-radius: 10px; }
+      .photograph-bandeau-left ul li span {
+        font-size: 9px;
+        font-weight: 12px;
+        color: black; }
   @media screen and (max-width: 1023px) {
     .photograph-bandeau-right {
       position: absolute;
@@ -618,11 +618,11 @@ main ul {
         border-radius: 50%;
         object-fit: cover;
         margin-bottom: 20px; }
-      main ul li a h2 {
-        font-size: 36px;
-        line-height: 47px;
-        color: #d3573c;
-        margin-bottom: 10px; }
+    main ul li h2 {
+      font-size: 36px;
+      line-height: 47px;
+      color: #d3573c;
+      margin-bottom: 10px; }
     main ul li div {
       display: flex;
       flex-direction: column;
@@ -653,6 +653,7 @@ main ul {
           display: flex;
           justify-content: center;
           align-items: center;
+          flex-direction: row;
           font-size: 1.2rem;
           line-height: 1.55rem;
           font-weight: 500;
@@ -660,6 +661,11 @@ main ul {
           padding: 0 5px;
           margin: 0 2px;
           border-radius: 10px; }
+          main ul li div ul li span {
+            font-size: 9px;
+            font-weight: 12px;
+            color: black;
+            margin-bottom: 0; }
   @media screen and (max-width: 1023px) {
     main ul {
       display: flex;

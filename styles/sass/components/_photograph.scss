@@ -45,12 +45,7 @@
         color: #757575;
         margin: 10px 0;
       }
-      span {
-        font-size: 9px;
-        font-weight: 12px;
-        color: #757575;
-        margin-bottom: 10px;
-      }
+      
       ul {
         display: flex;
         flex-direction: row;
@@ -61,6 +56,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          flex-direction: row;
           font-size: 1.2rem;
           line-height: 1.55rem;
           font-weight: 500;
@@ -68,6 +64,11 @@
           padding: 0 5px;
           margin: 0 2px;
           border-radius: 10px;
+          span {
+            font-size: 9px;
+            font-weight: 12px;
+            color: black;
+          }
         }
       }
     }

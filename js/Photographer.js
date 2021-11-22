@@ -21,7 +21,14 @@ export default class Photographer {
     let strong = document.createElement("strong");
     let p = document.createElement("p");
     let span = document.createElement("span");
+    let span2 = document.createElement("span");
     let ul = document.createElement("ul");
+
+    anchor.tabIndex = 0;
+    h2.tabIndex = 0;
+    strong.tabIndex = 0;
+    p.tabIndex = 0;
+    span.tabIndex = 0;
 
     anchor.href = `./photographerPage.html?id=${this.id}`; //
     img.src = `media/PhotographersIDPhotos/${this.portrait}`;
@@ -29,17 +36,33 @@ export default class Photographer {
     h2.textContent = `${this.name}`;
     strong.textContent = `${this.city}, ${this.country}`;
     p.textContent = `${this.tagline}`;
-    span.textContent = `${this.price}€/jour`;
+    span2.textContent = '/';
+    span2.ariaHidden = "true";
+    console.log(span2);
+    const firstText = document.createTextNode(`${this.price}€`);
+    const secondText = document.createTextNode(`jour`);
+    span.appendChild(firstText);
+    span.appendChild(span2);
+    span.appendChild(secondText);
 
-    anchor.appendChild(img);
-    anchor.appendChild(h2);
+
+   
+
+    anchor.appendChild(img)
     li.appendChild(anchor);
+    li.appendChild(h2);
     div.appendChild(strong);
     div.appendChild(p);
     div.appendChild(span);
     for (let i = 0; i < this.tags.length; i++) {
       let liTags = document.createElement("li");
-      liTags.textContent = `#${this.tags[i]}`;
+      let spanSr = document.createElement("span");
+      spanSr.textContent = "#";
+      spanSr.ariaHidden = "true";
+      const newText = document.createTextNode(this.tags[i]);
+      liTags.appendChild(spanSr);
+      liTags.appendChild(newText);
+      liTags.tabIndex = 0;
       ul.appendChild(liTags);
     }
     div.appendChild(ul);
@@ -55,7 +78,9 @@ export default class Photographer {
     const divButton = document.createElement("div");
     const h3 = document.createElement("h3");
     const a = document.createElement("a");
+    h2.tabIndex = 0;
     a.tabIndex = 0;
+ 
     a.classList.add("modal-toggle");
 
     a.addEventListener("keydown", (event) => {
@@ -71,15 +96,25 @@ export default class Photographer {
     divLeftInner.className = "photograph-bandeau-left_inner";
     h2.textContent = `${this.name}`;
     h3.textContent = `Contactez-moi`;
+    h3.ariaLabel = `Contactez-moi, appuyer sur entrer pour ouvrir la modale de contact`;
 
     const strong = document.createElement("strong");
     const p = document.createElement("p");
     const ul = document.createElement("ul");
+    strong.tabIndex = 0;
+    p.tabIndex = 0;
+
     strong.textContent = `${this.city}, ${this.country}`;
     p.textContent = `${this.tagline}`;
     for (let i = 0; i < this.tags.length; i++) {
       let liTags = document.createElement("li");
-      liTags.textContent = `#${this.tags[i]}`;
+      let spanSr = document.createElement("span");
+      spanSr.textContent = "#";
+      spanSr.ariaHidden = "true";
+      const newText = document.createTextNode(this.tags[i]);
+      liTags.appendChild(spanSr);
+      liTags.appendChild(newText);
+      liTags.tabIndex = 0;
       ul.appendChild(liTags);
     }
 
@@ -122,6 +157,8 @@ export default class Photographer {
 
     h4Modal.textContent = `Contactez-moi ${this.name}`;
     divModal.style.display = "flex";
+
+    crossAref.ariaLabel = "Fermer"
     crossAref.addEventListener("keydown", (event) => {
       if (event.key == "Enter") {
         this.closeModal();

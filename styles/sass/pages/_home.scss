@@ -32,12 +32,13 @@ main {
           object-fit: cover;
           margin-bottom: 20px;
         }
-        h2 {
-          font-size: 36px;
-          line-height: 47px;
-          color: #d3573c;
-          margin-bottom: 10px;
-        }
+        
+      }
+      h2 {
+        font-size: 36px;
+        line-height: 47px;
+        color: #d3573c;
+        margin-bottom: 10px;
       }
       div {
         display: flex;
@@ -72,6 +73,7 @@ main {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: row;
 
             font-size: 1.2rem;
             line-height: 1.55rem;
@@ -80,6 +82,12 @@ main {
             padding: 0 5px;
             margin: 0 2px;
             border-radius: 10px;
+            span {
+              font-size: 9px;
+              font-weight: 12px;
+              color: black;
+              margin-bottom: 0;
+            }
           }
         }
       }

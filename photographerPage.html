@@ -17,7 +17,7 @@
   <body>
     <!--======BANNER======-->
     <header class="headerSimple container">
-      <a href="./index.html" tabindex="1"
+      <a href="./index.html" tabindex="0"
         ><svg
           width="200"
           height="50"
@@ -69,25 +69,25 @@
 
       <div class="photograph-grid">
         <div class="photograph-grid-tri">
-          <p>Trier par</p>
+          <p tabindex="0">Trier par</p>
           <a id="filter" tabindex="0">
             <div class="photograph-grid-tri_buttonFirst">
               <div class="photograph-grid-tri_buttonFirst_notListed">
                 <p>Popularité</p>
               </div>
-              <span aria-label="Etendre ou détendre le menu"></span>
+              <span aria-label="Appuyer sur entrer pour étendre le menu de tri" role="button"></span>
             </div>
           </a>
 
           <div class="photograph-grid-tri_button" role="filter">
             <div class="photograph-grid-tri_button_list">
-              <a id="popularite" tabindex="0">
+              <a id="popularite" tabindex="0" aria-label="Appuyer sur entrer pour trier par Popularité">
                 <p>Popularité</p>
               </a>
-              <a id="date" tabindex="0">
+              <a id="date" tabindex="0" aria-label="Appuyer sur entrer pour trier par Date">
                 <p>Date</p>
               </a>
-              <a id="titre" tabindex="0">
+              <a id="titre" tabindex="0" aria-label="Appuyer sur entrer pour trier par Titre">
                 <p>Titre</p>
               </a>
             </div>
@@ -98,8 +98,8 @@
       </div>
 
       <div class="photograph-card">
-        <p></p>
-        <p></p>
+        <p tabindex="0"></p>
+        <p tabindex="0" ></p>
       </div>
       <div class="modal">
         <div class="modal-container">
@@ -110,7 +110,7 @@
             </a>
           </div>
           <div class="modal-container_inputs">
-            <label for="prenomInput">Prenom</label>
+            <label for="prenomInput">Prénom</label>
             <input id="prenomInput" type="text" />
             <label for="nomInput">Nom</label>
             <input id="nomInput" type="text" />
@@ -124,9 +124,9 @@
       </div>
 
       <div class="lightboxModal">
-        <span class="lightboxModal_left" tabindex="1"></span>
+        <span aria-label="précédent" class="lightboxModal_left" tabindex="1"></span>
 
-        <span class="lightboxModal_right" tabindex="1"></span>
+        <span  aria-label="suivant" class="lightboxModal_right" tabindex="1"></span>
 
         <span
           class="lightboxModal_cross"

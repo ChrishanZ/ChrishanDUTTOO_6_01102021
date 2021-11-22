@@ -14,6 +14,7 @@ export default class Video {
     const vidMedia = document.createElement("video");
     vidMedia.tabIndex = 0;
     vidMedia.src = `media/artistsVideos/${this.video}`;
+    vidMedia.ariaLabel = `${this.alt}`;
     vidMedia.type = "video/mp4";
     return vidMedia;
   }

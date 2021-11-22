@@ -80,7 +80,15 @@ export default class Homepage {
       let a = document.createElement("a");
       a.tabIndex = 0;
       let li = document.createElement("li");
-      li.textContent = `#${this.tags[i]}`;
+      
+      let spanSr = document.createElement("span");
+      spanSr.textContent = "#";
+      spanSr.ariaHidden = "true";
+      const newText = document.createTextNode(this.tags[i]);
+      li.appendChild(spanSr);
+      li.appendChild(newText);
+   
+      
       li.setAttribute("id", "anchorTags");
       a.appendChild(li);
       navigation.appendChild(a);
