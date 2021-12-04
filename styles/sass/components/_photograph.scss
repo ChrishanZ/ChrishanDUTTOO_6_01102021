@@ -28,6 +28,9 @@
           h3 {
             cursor: pointer;
           }
+          &:hover{
+            background-color: #DB8876;
+          }
         }
       }
       h2 {
@@ -217,6 +220,9 @@
         font-weight: 400;
         font-size: 18px;
         color: white;
+        &:hover{
+          background-color: #DB8876;
+        }
         &_notListed {
           p {
             border-bottom: 2px solid white;

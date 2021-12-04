@@ -92,14 +92,14 @@ export default class PhotographerPage {
       filterTextClickedPopularite.addEventListener(
         evt,
         () => {
-          if (evt === "click" || evt === "keypress") {
             this.deleteDomMedia();
             this.medias.sort(function (a, b) {
               return b.likes - a.likes;
             });
             this.displayMedias(this.medias);
             this.updateFilter(filterTextClickedPopularite.innerText);
-          }
+            menuOuvert.style.display = "none";
+            menuFermer.style.display = "flex";
         },
         false
       )
@@ -109,7 +109,6 @@ export default class PhotographerPage {
       filterTextClickedDate.addEventListener(
         evt,
         () => {
-          if (evt === "click" || evt === "keypress") {
             this.deleteDomMedia();
             this.medias.sort(function (a, b) {
               var x = a.alt.toLowerCase();
@@ -118,7 +117,8 @@ export default class PhotographerPage {
             });
             this.displayMedias(this.medias);
             this.updateFilter(filterTextClickedDate.innerText);
-          }
+            menuOuvert.style.display = "none";
+            menuFermer.style.display = "flex";
         },
         false
       )
@@ -135,6 +135,8 @@ export default class PhotographerPage {
             });
             this.displayMedias(this.medias);
             this.updateFilter(filterTextClickedTitre.innerText);
+            menuOuvert.style.display = "none";
+            menuFermer.style.display = "flex";
           }
         },
         false

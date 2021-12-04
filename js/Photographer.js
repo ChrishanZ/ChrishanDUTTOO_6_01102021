@@ -162,16 +162,28 @@ export default class Photographer {
     crossAref.addEventListener("keydown", (event) => {
       if (event.key == "Enter") {
         this.closeModal();
+        prenomInput.value = "";
+        nomInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
       }
     });
     modal.addEventListener("keydown", (event) => {
       if (event.keyCode == 27) {
         this.closeModal();
+        prenomInput.value = "";
+        nomInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
       }
     });
 
     cross.addEventListener("click", () => {
       this.closeModal();
+        prenomInput.value = "";
+        nomInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
     });
 
     buttonSend.addEventListener("click", () => {
@@ -179,6 +191,11 @@ export default class Photographer {
       console.log("Nom : ", nomInput.value);
       console.log("Mail : ", emailInput.value);
       console.log("Message : ", messageInput.value);
+      this.closeModal();
+      prenomInput.value = "";
+      nomInput.value = "";
+      emailInput.value = "";
+      messageInput.value = "";
     });
 
     // Find all focusable children

@@ -233,6 +233,8 @@ nav {
       margin-left: 60px; }
       .photograph-bandeau-left_inner div h3 {
         cursor: pointer; }
+      .photograph-bandeau-left_inner div:hover {
+        background-color: #DB8876; }
   .photograph-bandeau-left h2 {
     font-size: 64px;
     color: #d3573c; }
@@ -376,6 +378,8 @@ nav {
       font-weight: 400;
       font-size: 18px;
       color: white; }
+      .photograph-grid-tri_buttonFirst:hover {
+        background-color: #DB8876; }
       .photograph-grid-tri_buttonFirst_notListed p {
         border-bottom: 2px solid white;
         margin-top: 0;
